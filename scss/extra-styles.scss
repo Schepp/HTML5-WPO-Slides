@@ -1,0 +1,39 @@
+.reveal {
+  h1, h2, h3, h4, h5, h6, ol, ul, p, table, pre {
+	margin-bottom: 2rem;
+
+	html.inverted & {
+	  color: #FFF;
+	  text-shadow: 0 0 2px #000, 0 0 4px #000, 0 0 8px #000;
+	}
+  }
+
+  li {
+	margin-bottom: 1rem;
+  }
+
+  table  {
+	table-layout: fixed;
+	width: 100%;
+	max-width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 1em 0;
+	font-size: 0.75em;
+	border-top: 1px solid currentcolor;
+	border-bottom: 1px solid currentcolor;
+  }
+
+  th, td {
+	padding: 0 0.2em;
+	white-space: nowrap;
+	text-align:  center;
+
+	img {
+	  margin: 0;
+	  border: none;
+	  background: transparent;
+	  box-shadow: none;
+	}
+  }
+}
