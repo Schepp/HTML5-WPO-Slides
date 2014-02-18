@@ -19,12 +19,12 @@ html.inverted .reveal h1, html.inverted .reveal h2, html.inverted .reveal h3, ht
   border-top: 1px solid currentcolor;
   border-bottom: 1px solid currentcolor;
 }
-.reveal th, .reveal td {
+.reveal table th, .reveal table td {
   padding: 0 0.2em;
   white-space: nowrap;
   text-align: center;
 }
-.reveal th img, .reveal td img {
+.reveal table th img, .reveal table td img {
   margin: 0;
   border: none;
   background: transparent;
