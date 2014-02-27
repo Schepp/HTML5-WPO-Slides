@@ -58,7 +58,7 @@ var el = $('selector')[0];
 el.addClass('classA classB');
 ```
 
-[Demo A](http://codepen.io/Schepp/pen/ArJqE);
+[Demo](http://codepen.io/Schepp/pen/ArJqE)
 ---
 ### forEach & classList
 
@@ -77,7 +77,7 @@ Mobile:
 
 | ![Chrome](images/browserlogos/android.png) | ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/ios.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| 3.0*/4+ | &#10004; | &#10004; | &#10004; | 10+ |
+| 3+ | &#10004; | &#10004; | &#10004; | 10+ |
 
 *= Android 2.x - 3.x können prinzipiell CSS Animationen, haben aber zahlreiche Bugs
 
@@ -127,7 +127,7 @@ el.slideDown();
 
 ```js
 Element.prototype.slideUp = function() {
-  this.on('transitionend', function(e) {
+  this.on('transitionEnd', function(e) {
   	e.target.style.display = 'none';
   });
   this.addClass('slide slideUp');
@@ -210,12 +210,14 @@ el.fadeOut();
 ---
 ### jQuery-Effekte
 
-[Demo A](http://codepen.io/Schepp/pen/kvJti);
-[Demo B](http://codepen.io/Schepp/pen/LcIyn);
-[Demo C](http://codepen.io/Schepp/pen/uaqGx);
+[Demo A](http://codepen.io/Schepp/pen/kvJti)
+
+[Demo B](http://codepen.io/Schepp/pen/LcIyn)
+
+[Demo C](http://codepen.io/Schepp/pen/uaqGx)
 
 ---
-### Animations, Transitions, forEach & classList
+### Animations & Transitions
 
 Desktop:
 
@@ -226,14 +228,20 @@ Desktop:
 Can I use [CSS Animation](http://caniuse.com/css-animation) / [CSS Transition](http://caniuse.com/css-transition) / [classList](http://caniuse.com/classlist)
 
 ---
-### Animations, Transitions & classList
+### Animations & Transitions
 
 Mobile:
 
 | ![Chrome](images/browserlogos/android.png) | ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/ios.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| 3.0*/4+ | &#10004; | &#10004; | &#10004; | 10+ |
+| 4+* | &#10004; | &#10004; | &#10004; | 10+ |
 
 *= Android 2.x - 3.x können prinzipiell CSS Animationen, haben aber zahlreiche Bugs
 
 Can I use [CSS Animation](http://caniuse.com/css-animation) / [CSS Transition](http://caniuse.com/css-transition) / [classList](http://caniuse.com/classlist)
+
+---
+### Weiterführende Literatur
+
+* [I know jQuery. Now what?](http://remysharp.com/2013/04/19/i-know-jquery-now-what/)
+* [You might not need jQuery](http://youmightnotneedjquery.com/)

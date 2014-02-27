@@ -213,6 +213,6 @@ script.src = "file.js";
 
 Auf die Weise lässt sich in IE ein Script schon vorzeitig laden, so dass es bei Bedarf schneller zu Hand ist.
 ---
-### Scriptloading
+### Weiterführende Literatur
 
-<a href="http://www.html5rocks.com/en/tutorials/speed/script-loading/">Weiterführender Artikel</a>
+[HTML5 Rocks - Script Loading](http://www.html5rocks.com/en/tutorials/speed/script-loading/)
