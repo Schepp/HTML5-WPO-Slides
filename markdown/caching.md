@@ -75,7 +75,7 @@ Die Änderungen passiert online und nicht offline beim User. Bringt also nichts!
 ---
 ### Application Cache
 
-Die einzige Möglichkeit, den Browser zum aktualisieren von Ressourcen zu bewegen, ist die Manifestdatei inhaltlich zu verändern, z.B. durch eine integrierte Versionsnummer:
+Die einzige Möglichkeit, den Browser zum Aktualisieren von Ressourcen zu bewegen, ist die Manifestdatei inhaltlich zu verändern, z.B. durch eine integrierte Versionsnummer:
 
 ```
 CACHE MANIFEST
@@ -107,8 +107,12 @@ assets/style/fonts/font.woff
 assets/style/images/sprite.png
 ```
 
-Der Browser checkt das Manifest immer unmittelbar nach Ende des Seitenladens. Sprich, neue Dateien manifestieren sich erst **beim übernächsten Aufruf**.
+Der Browser checkt und verarbeitet das Manifest immer erst **nach Ende des Seitenladens**. Sprich, neue Dateien manifestieren sich erst **beim übernächsten Aufruf**.
 
+---
+### Application Cache
+
+![HTML5 AppCache Update Behavior](images/HTML5%20AppCache%20Update%20Behavior.png)
 ---
 ### Application Cache
 
