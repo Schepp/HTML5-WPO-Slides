@@ -7,7 +7,12 @@
 ```js
 var $ = document.querySelectorAll.bind(document);
 
-var el = $('selector')[0];
+var el = $('#id')[0],
+	els = $('.class');
+
+els.forEach( function(el, index) {
+	el.innerHTML = 'Number ' + (index + 1);
+});
 ```
 ---
 ### jQuery-Events
@@ -17,11 +22,55 @@ var el = $('selector')[0];
 ```js
 Element.prototype.on = Element.prototype.addEventListener;
 
-var el = $('selector')[0];
-el.on('click', handleEvent);
+$('selector')[0].on('click', handleEvent);
 ```
 ---
-### querySelectorAll & addEventListener
+### jQuery-Events
+
+`$('selector').on('click', 'a[href="#"]', handleEvent);`
+
+```js
+Element.prototype.on = function() {
+	var args = arguments;
+	if ( args.length <= 2 ) {
+		this.addEventListener(args[0], args[1]);
+	} else {
+		this.addEventListener(args[0], function(e) {
+			if ( e.target.matches(args[1] ) {
+				args[2](e);
+			}
+		});
+	}
+}
+
+$('selector')[0].on('click', 'a[href="#"]', handleEvent);
+```
+---
+### jQuery-Events
+
+`$('selector').on('touchstart click', 'a[href="#"]', handleEvent);`
+
+```js
+Element.prototype.on = function() {
+	var args = arguments,
+		that = this;
+	args[0].split(' ').forEach( function(eventName) {
+		if ( args.length <= 2 ) {
+			that.addEventListener(eventName, args[1]);
+		} else {
+			that.addEventListener(eventName, function(e) {
+				if ( e.target.matches(args[1] ) {
+					args[2](e);
+				}
+			});
+		}
+	});
+}
+
+$('selector')[0].on('touchstart click', 'a[href="#"]', handleEvent);
+```
+---
+### querySelectorAll & addEventListener & matches
 
 Desktop:
 
@@ -29,16 +78,59 @@ Desktop:
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | &#10004; | &#10004; | &#10004; | 9+ |
 
-Can I use [CSS Animation](http://caniuse.com/css-animation) / [CSS Transition](http://caniuse.com/css-transition) / [classList](http://caniuse.com/classlist)
+element.matches()/matchesSelector() [Doku](https://developer.mozilla.org/en-US/docs/Web/API/Element.matches) & [Supporttable](http://caniuse.com/matchesselector)
 
 ---
-### querySelectorAll & addEventListener
+### querySelectorAll & addEventListener & matches
+
+Mobile:
+
+| ![Chrome](images/browserlogos/android.png) | ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/ios.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 2.2+ | &#10004; | &#10004; | &#10004; | 9+ |
+
+---
+### jQuery-AJAX
+
+`$.getJSON('/my/url', function(data) {});`
+
+```js
+var $getJSON = function( url, callback ) {
+	var request = new XMLHttpRequest;
+	request.open('GET', url, true);
+	request.onload = function() {
+	  if ( request.status >= 200 && request.status < 400 ){
+		callback(JSON.parse(request.responseText));
+	  } else {
+		console.log('serverside error fetching ' + url);
+	  }
+	};
+	request.onerror = function() {
+		console.log('clientside error fetching ' + url);
+	};
+	request.send();
+}
+
+$getJSON('/my/url', function(data) {});
+```
+---
+### XMLHttpRequest & JSON
+
+Desktop:
+
+| ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/safari.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| &#10004; | &#10004; | &#10004; | 9+ |
+
+---
+### XMLHttpRequest & JSON
 
 Mobile:
 
 | ![Chrome](images/browserlogos/android.png) | ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/ios.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
 | 2.1+ | &#10004; | &#10004; | &#10004; | 9+ |
+
 ---
 ### jQuery-Klassensetzen
 

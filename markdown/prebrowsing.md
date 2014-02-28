@@ -223,6 +223,28 @@ Mobile:
 
 Bei Mobilgeräten gibt es den Interessenskonflikt, dass man gleichzeitig den Datenverbrauch gering halten möchte. Dementsprechend bleibt `prerender` in Chrome abgeschaltet.
 ---
+### HTTP Header
+
+Alle `<link>`-Anweisungen sollen sich zukünftig auch in HTTP-Header verlagern lassen:
+
+```
+HTTP/1.1 200 OK
+Date: Thu, 26 Jul 2012 22:27:21 GMT
+Server: Apache
+Content-Location: foo.html
+Vary: negotiate,Accept-Encoding
+Last-Modified: Thu, 26 Jul 2012 20:55:56 GMT
+Accept-Ranges: bytes
+Content-Length: 675
+Expires: Thu, 02 Aug 2012 22:27:21 GMT
+Link: <js/nextpage.js>; rel=prefetch
+Link: <js/logic.js>; rel=subresource
+Content-Type: text/html; charset=utf-8
+```
+
+Wird aktuell nur von Firefox unterstützt.
+
+---
 ### Lazyload
 
 ```html
@@ -306,3 +328,12 @@ Mobile:
 * `lazyload`- und `postpone`-behaftete Elemente blockieren das globale `load`-Event nicht.
 * Sind alle mit `lazyload` ausgezeichneten Elemente geladen, wird ein globales `lazyload`-Event gefeuert
 * `lazyload`- und `postpone`-behaftete Elemente feuern nach wie vor individuelle, eigene `load`-Events
+---
+### Die Zukunft
+
+Für die nahe Zukunft sind folgende zusätzliche Link-Anweisungen geplant:
+
+* `<link rel="preconnect">` öffnet frühzeitig eine TCP-Verbindung zu dem angegebenen Host.
+* `<link rel="preload">` ist eine Kombination aus subresource & prefetch mit "content awareness".
+
+Siehe Diskussion auf [lists.w3.org](http://lists.w3.org/Archives/Public/public-web-perf/2013Nov/0083.html)
