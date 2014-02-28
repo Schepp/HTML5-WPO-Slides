@@ -36,4 +36,26 @@
       }
     }
   }
+
+  blockquote {
+	margin-bottom: 1rem;
+	padding: 1rem;
+	background-color: rgba(255,255,255,.9);
+
+	& + p {
+	  font-style: italic;
+	}
+	> p {
+	  quotes: "“" "”" "‘" "’";
+	}
+	> p:last-child {
+	  margin-bottom: 0;
+	}
+	> p:first-child:before {
+		content: open-quote ' ';
+	}
+	> p:last-child:after {
+		content: ' ' close-quote;
+	}
+  }
 }

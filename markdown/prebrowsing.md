@@ -63,7 +63,7 @@ Gut zum Vorbereiten des Browsers auf externe JavaScript-Libraries:
 </head>
 <body>
 	...blah...blah...
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></s​cript>
 </body>
 ```
 
@@ -126,7 +126,7 @@ Mobile:
 </head>
 <body>
 	...blah...blah...
-	<script src="veryimportant.js">
+	<script src="veryimportant.js"></s​cript>
 </body>
 ```
 
@@ -329,11 +329,28 @@ Mobile:
 * Sind alle mit `lazyload` ausgezeichneten Elemente geladen, wird ein globales `lazyload`-Event gefeuert
 * `lazyload`- und `postpone`-behaftete Elemente feuern nach wie vor individuelle, eigene `load`-Events
 ---
+### XHR zum Vorladen verwenden?
+
+Nope! XHR-Calls sollten nicht für das Vorladen kritischer Ressourcen genutzt werden, da sie eine [deutlich geringere Priorität genießen](https://docs.google.com/presentation/d/18zlAdKAxnc51y_kj-6sWLmnjl6TLnaru_WH0LJTjP-o/present#slide=id.g11c7a3308_2_0) als via `<link>` deklarierte Ressourcen.
+---
 ### Die Zukunft
 
 Für die nahe Zukunft sind folgende zusätzliche Link-Anweisungen geplant:
 
-* `<link rel="preconnect">` öffnet frühzeitig eine TCP-Verbindung zu dem angegebenen Host.
+* `<link rel="preconnect">` öffnet frühzeitig eine TCP-Verbindung zu dem angegebenen Host, um den sogenannten [TCP-Slow-Start](http://www.igvita.com/2011/10/20/faster-web-vs-tcp-slow-start/) zu verstecken.
 * `<link rel="preload">` ist eine Kombination aus subresource & prefetch mit "content awareness".
 
 Siehe Diskussion auf [lists.w3.org](http://lists.w3.org/Archives/Public/public-web-perf/2013Nov/0083.html)
+---
+### Die Zukunft
+
+Der geplante EcmaScript 6 Module Loader wird dem Browser möglicherweise ebenfalls Hinweise bzgl. zu ladender JavaScript-Module geben:
+
+```html
+<script type="module">
+	// loads the 'q' export from 'mymodule.js' in the same path as the page
+	import { q } from 'mymodule';
+</s​cript>
+```
+
+Siehe [ES6 Modules Polyfill](https://github.com/ModuleLoader/es6-module-loader)

@@ -1,3 +1,4 @@
+@charset "CP850";
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6, .reveal ol, .reveal ul, .reveal p, .reveal table, .reveal pre {
   margin-bottom: 2rem;
 }
@@ -29,4 +30,24 @@ html.inverted .reveal h1, html.inverted .reveal h2, html.inverted .reveal h3, ht
   border: none;
   background: transparent;
   box-shadow: none;
+}
+.reveal blockquote {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+.reveal blockquote + p {
+  font-style: italic;
+}
+.reveal blockquote > p {
+  quotes: "“" "”" "‘" "’";
+}
+.reveal blockquote > p:last-child {
+  margin-bottom: 0;
+}
+.reveal blockquote > p:first-child:before {
+  content: open-quote ' ';
+}
+.reveal blockquote > p:last-child:after {
+  content: ' ' close-quote;
 }

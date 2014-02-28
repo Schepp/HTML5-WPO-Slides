@@ -41,7 +41,7 @@ Element.prototype.on = function() {
 			}
 		});
 	}
-}
+};
 
 $('selector')[0].on('click', 'a[href="#"]', handleEvent);
 ```
@@ -65,7 +65,7 @@ Element.prototype.on = function() {
 			});
 		}
 	});
-}
+};
 
 $('selector')[0].on('touchstart click', 'a[href="#"]', handleEvent);
 ```
@@ -120,7 +120,7 @@ Desktop:
 
 | ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/safari.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
 | ------------- | ------------- | ------------- | ------------- | ------------- |
-| &#10004; | &#10004; | &#10004; | 9+ |
+| &#10004; | &#10004; | &#10004; | 8+ |
 
 ---
 ### XMLHttpRequest & JSON

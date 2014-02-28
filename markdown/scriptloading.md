@@ -2,7 +2,7 @@
 ---
 ### Defer
 ```html
-<script src="independantscript.js" defer>
+<script src="independantscript.js" defer></s​cript>
 ```
 
 Das `defer`-Attribut ist eine Erfindung von Microsoft und kann an `script`-Elemente angeheftet werden.
@@ -14,7 +14,7 @@ Normalerweise blockiert der Parser, denn es könnte ja ein `document.write` im S
 ---
 ### Defer
 ```html
-<script src="independantscript.js" defer>
+<script src="independantscript.js" defer></s​cript>
 ```
 
 `defer` funktioniert nur für extern referenziertes JavaScript. Inline-JavaScript wird immer an Ort und Stelle ausgeführt.
@@ -28,8 +28,8 @@ Ein in HTML mit `defer` ausgestattetes Script verzögert wie gehabt das `DOMCont
 Der Browser führt alle mit `defer` markierten Scripte in der im Markup definierten Reihenfolge aus. Sie dürfen also Abhängigkeiten untereinander aufweisen:
 
 ```html
-<script src="jquery.js" defer>
-<script src="jquery-plugin.js" defer>
+<script src="jquery.js" defer></s​cript>
+<script src="jquery-plugin.js" defer></s​cript>
 ```
 
 ---
@@ -38,8 +38,8 @@ Der Browser führt alle mit `defer` markierten Scripte in der im Markup definier
 Ein Mischmasch ist jedoch keine so gute Idee:
 
 ```html
-<script src="jquery.js" defer>
-<script src="jquery-plugin.js">
+<script src="jquery.js" defer></s​cript>
+<script src="jquery-plugin.js"></s​cript>
 ```
 
 ---
@@ -68,7 +68,7 @@ Presto-Opera unterstützt das `defer`-Attribut nicht, Blink-Opera (16+) jedoch s
 ---
 ### Async
 ```html
-<script src="independantscript.js" async>
+<script src="independantscript.js" async></s​cript>
 ```
 
 Das `async`-Attribut ist eine Erfindung von Mozilla und kann ebenfalls an `script`-Elemente angeheftet werden.
@@ -80,7 +80,7 @@ Normalerweise werden Scripte zwar durchaus parallel geladen, dann aber in Reihe 
 ---
 ### Async
 ```html
-<script src="independantscript.js" async>
+<script src="independantscript.js" async></s​cript>
 ```
 
 `async` funtioniert nur für extern referenziertes JavaScript. Inline-JavaScript wird immer in Reihe ausgeführt!
@@ -92,8 +92,8 @@ Ein in HTML mit `async` ausgestattetes Script verzögert nicht mehr das `DOMCont
 Keine gute Idee:
 
 ```html
-<script src="jquery.js" async>
-<script src="jquery-plugin.js" async>
+<script src="jquery.js" async></s​cript>
+<script src="jquery-plugin.js" async></s​cript>
 ```
 
 Da `jquery-plugin.js` sehr wahrscheinlich kleiner ist als `jquery.js` wäre es vorher runtergeladen und würde als erstes ausgeführt. Es würde Schiffbruch erleiden.
@@ -103,8 +103,8 @@ Da `jquery-plugin.js` sehr wahrscheinlich kleiner ist als `jquery.js` wäre es v
 Besser:
 
 ```html
-<script src="jquery-und-alle-jquery-plugins.js" async>
-<script src="von-jquery-vollkommen-unabhaengiges-script.js" async>
+<script src="jquery-und-alle-jquery-plugins.js" async></s​cript>
+<script src="von-jquery-vollkommen-unabhaengiges-script.js" async></s​cript>
 ```
 
 Die Chancen für `async` steigen mit dem Grad, in dem wir uns von jQuery unabhängig machen (mehr zu dem Thema später).
@@ -216,3 +216,26 @@ Auf die Weise lässt sich in IE ein Script schon vorzeitig laden, so dass es bei
 ### Weiterführende Literatur
 
 [HTML5 Rocks - Script Loading](http://www.html5rocks.com/en/tutorials/speed/script-loading/)
+---
+### Die Zukunft
+
+Der geplante EcmaScript 6 Module Loader wird im Browser asynchron arbeiten (anders als z.B. in Node.js) und dabei trotzdem Modulabhängigkeiten sicherstellen, ähnlich wie es require.js & Co heute schon tun:
+
+```js
+/* mymodule.js */
+export class q {
+	constructor() {
+		console.log('this is an es6 class!');
+	}
+}
+```
+
+```html
+<script type="module">
+	// loads the 'q' export from 'mymodule.js' in the same path as the page
+	import { q } from 'mymodule';
+	new q(); // -> 'this is an es6 class!';
+</s​cript>
+```
+
+Siehe [ES6 Modules Polyfill](https://github.com/ModuleLoader/es6-module-loader)
