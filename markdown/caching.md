@@ -186,7 +186,7 @@ NETWORK:
 *
 ```
 
-Das funktioniert dummerweise nur mit der HTML-Datei selbst nicht!!! Args...
+Das funktioniert dummerweise nur mit der HTML-Datei selbst nicht!!! Sie ist der sogenannte "Masterindex", args...
 ---
 ### AppCache
 
@@ -293,11 +293,44 @@ Lösung: Ein nahezu leeres HTML Grundgerüst verwenden und die Inhalte nachladen
 
 [Demo](demos/caching/appcache-xhr-imports/)
 ---
+### Web Components
+
+Desktop:
+
+| ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/safari.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| 2014* | &#10008; | 2014 | ? |
+
+*= ab Chrome 31 in `about:flags` als Eintrag `Enable HTML Imports` freischaltbar
+
+---
+### Web Components
+
+Mobile:
+
+| ![Chrome](images/browserlogos/android.png) | ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/ios.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| ? | 2014 | &#10008; | 2014 | ? |
+
+---
+### AppCache
+
+Nachteile von AppCache:
+
+* Änderungen erst beim übernächsten Besuch sichtbar
+* Risiko einer Disparität von Frontend- und Backend-Code
+* Kompletter Abbruch wenn eine im Manifest gelistete Datei nicht abrufbar ist (z.B. 404)
+* Kompletter Abbruch bei Änderungen im Manifest während der Abarbeitung
+* Referenzierende Datei lässt sich nicht ausklammern
+
+---
 ### AppCache
 
 Noch was? Jepp! Firefox jagt dem Benutzer Angst ein, indem er beim ersten Besuch danach fragt, ob die Seite Daten offline speichern darf:
 
 ![Firefox Sicherheitsabfrage](images/firefox-appcache.png)
+
+Einzige Abhilfe: Serverseitiges Useragent-Sniffing
 
 ---
 ### AppCache
