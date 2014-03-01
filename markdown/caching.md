@@ -1,5 +1,38 @@
 ## Klügeres Caching via APIs
 ---
+### Motivation
+
+<div class="datatable"></div>
+
+| OS                | Browser            | Max Persistent Cache Size |
+|-------------------|--------------------|---------------------------|
+| iOS 4.3           | Mobile Safari      | 0                         |
+| iOS 5.1.1         | Mobile Safari      | 0                         |
+| iOS 5.1.1         | Chrome for IOS     | 200 MB+                   |
+| Android 2.2       | Android Browser    | 4 MB                      |
+| Android 2.3       | Android Browser    | 4 MB                      |
+| Android 3.0       | Android Browser    | 20 MB                     |
+| Android 4.0 – 4.1 | Chrome for Android | 85 MB                     |
+| Android 4.0 – 4.1 | Android Browser    | 85 MB                     |
+| Android 4.1       | Firefox Beta       | 75 MB                     |
+| Blackberry OS 6   | Browser            | 25 MB                     |
+| Blackberry OS 7   | Browser            | 85 MB                     |
+
+[Guy Podjarny - Mobile Browser Cache Sizes](http://www.guypo.com/uncategorized/mobile-browser-cache-sizes-round-2/)
+
+---
+### Motivation
+
+![HTTP Archive Trends Total Size](images/HTTP%20Archive%20Trends%20Total%20Size.png)
+
+[HTTP Archive Trends](http://httparchive.org/trends.php)
+---
+### Motivation
+
+![HTTP Archive Cacheable Resources](images/HTTP%20Archive%20Cacheable%20Resources.png)
+
+[HTTP Archive Trends](http://httparchive.org/trends.php)
+---
 ### Application Cache
 
 * Eines der prominentesten neuen Features von HTML5
@@ -97,6 +130,11 @@ Der Besucher bliebe in der Vergangenheit gefangen.
 ---
 ### Application Cache
 
+Apropos Cache-Header: Der Application Cache ist eine zweite Cache-Layer über dem üblichen clientseitigen Cache. Daher ist es weiterhin sinnvoll, alle Ressourcen mit Far-Future Cache Headern auszustatten, so dass die Browser nur die wirklich aktualisierten Dateien beim Updaten des Manifests vom Server lädt.
+
+---
+### Application Cache
+
 ```
 CACHE MANIFEST
 # v2
@@ -113,6 +151,23 @@ Der Browser checkt und verarbeitet das Manifest immer erst **nach Ende des Seite
 ### Application Cache
 
 ![HTML5 AppCache Update Behavior](images/HTML5%20AppCache%20Update%20Behavior.png)
+---
+### Application Cache
+
+Ressourcen, die nicht im Manifest stehen, im HTML/CSS/JS aber referenziert werden, werden bei aktivem Offline-Modus nicht mehr geladen - auch dann nicht, wenn eine Onlineverbindung zu ihnen besteht. Abhilfe schafft der `NETWORK`-Eintrag:
+
+```
+CACHE MANIFEST
+# v1
+assets/foo.bar
+
+NETWORK:
+*
+```
+---
+### Application Cache
+
+(das funktioniert dummerweise nur mit der HTML-Datei selbst nicht)
 ---
 ### Application Cache
 

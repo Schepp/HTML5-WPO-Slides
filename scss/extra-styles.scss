@@ -12,6 +12,7 @@
 	border: none;
 	background: transparent;
 	box-shadow: none;
+	filter: drop-shadow(0 0 1px #333) drop-shadow(0 0 4px #FFF) drop-shadow(0 0 8px #FFF);
   }
 
   li {
@@ -41,6 +42,19 @@
         box-shadow: none;
       }
     }
+  }
+
+  .datatable + table {
+	font-size: 0.5em;
+	line-height: 1.4;
+	border-collapse: collapse;
+
+	tr:nth-child(even) {
+	  background: rgba(255,255,255,.5);
+	}
+	th, td {
+	  text-align:  left;
+	}
   }
 
   blockquote {

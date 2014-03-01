@@ -10,6 +10,8 @@ html.inverted .reveal h1, html.inverted .reveal h2, html.inverted .reveal h3, ht
   border: none;
   background: transparent;
   box-shadow: none;
+  -webkit-filter: drop-shadow(0 0 1px #333333) drop-shadow(0 0 4px white) drop-shadow(0 0 8px white);
+  filter: drop-shadow(0 0 1px #333333) drop-shadow(0 0 4px white) drop-shadow(0 0 8px white);
 }
 .reveal li {
   margin-bottom: 1rem;
@@ -35,6 +37,17 @@ html.inverted .reveal h1, html.inverted .reveal h2, html.inverted .reveal h3, ht
   border: none;
   background: transparent;
   box-shadow: none;
+}
+.reveal .datatable + table {
+  font-size: 0.5em;
+  line-height: 1.4;
+  border-collapse: collapse;
+}
+.reveal .datatable + table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.5);
+}
+.reveal .datatable + table th, .reveal .datatable + table td {
+  text-align: left;
 }
 .reveal blockquote {
   margin-bottom: 1rem;
