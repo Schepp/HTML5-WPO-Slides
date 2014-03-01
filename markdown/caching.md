@@ -188,15 +188,62 @@ Das funktioniert dummerweise nur mit der HTML-Datei selbst nicht!!! Args...
 ---
 ### Application Cache
 
-**Lösung:** AppCache mit [HTML Imports](http://w3c.github.io/webcomponents/spec/imports/) verheiraten!
+Lösung: Ein nahezu leeres HTML Grundgerüst verwenden und die Inhalte nachladen:
+
+* via XHR, oder
+* via [HTML Imports](http://w3c.github.io/webcomponents/spec/imports/), oder
+* via beidem (Featuredetection)
+---
+### Application Cache + XHR
 
 ```html
+<!DOCTYPE html>
 <html manifest="offline.appcache">
-<link rel="import" href="http://example.com/elements.html">
+<head></head>
+<body>
+    <script>
+        var request = new XMLHttpRequest;
+        request.open('GET', 'import.html', true);
+        request.onload = function() {
+            if ( request.status >= 200 && request.status < 400 ){
+                document.body.innerHTML = request.responseText;
+            }
+        };
+        request.send();
+    </s​cript>
+</body>
+</html>
+```
+
+[Demo](demos/caching/appcache-xhr/)
+
+---
+### Application Cache + HTML Imports
+
+```html
+<!DOCTYPE html>
+<html manifest="offline.appcache">
+<head>
+    <link rel="import" href="import.html">
+</head>
+<body></body>
+</html>
+```
+
+```html
+<div id="content"><p>Hello World!</p></div>
+<script>
+    (function(){
+        var importDoc = document.currentScript.ownerDocument,
+        	content = importDoc.querySelector('#content').innerHTML;
+        window.addEventListener('load', function(){
+            document.body.innerHTML = content;
+        })
+    }());
+</s​cript>
 ```
 
 [Demo](demos/caching/appcache-imports/)
-
 ---
 ### Application Cache
 

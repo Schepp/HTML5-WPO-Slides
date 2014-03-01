@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html manifest="offline.appcache">
+<head>
+    <title>AppCache paired with XHR</title>
+</head>
+<body>
+    <script>
+        var request = new XMLHttpRequest;
+        request.open('GET', 'import.html', true);
+        request.onload = function() {
+            if ( request.status >= 200 && request.status < 400 ){
+                document.body.innerHTML = request.responseText;
+            }
+        };
+        request.send();
+    </script>
+</body>
+</html>
