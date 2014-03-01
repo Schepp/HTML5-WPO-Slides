@@ -2,6 +2,8 @@
 ---
 ### Motivation
 
+"Cache Pinning"
+
 <div class="datatable"></div>
 
 | OS                | Browser            | Max Persistent Cache Size |
@@ -24,6 +26,12 @@
 ### Motivation
 
 ![HTTP Archive Trends Total Size](images/HTTP%20Archive%20Trends%20Total%20Size.png)
+
+[HTTP Archive Trends](http://httparchive.org/trends.php)
+---
+### Motivation
+
+![HTTP Archive Image Size](images/HTTP%20Archive%20Trends%20Image%20Size.png)
 
 [HTTP Archive Trends](http://httparchive.org/trends.php)
 ---
@@ -167,7 +175,28 @@ NETWORK:
 ---
 ### Application Cache
 
-(das funktioniert dummerweise nur mit der HTML-Datei selbst nicht)
+```
+CACHE MANIFEST
+# v1
+assets/foo.bar
+
+NETWORK:
+*
+```
+
+Das funktioniert dummerweise nur mit der HTML-Datei selbst nicht!!! Args...
+---
+### Application Cache
+
+**Lösung:** AppCache mit [HTML Imports](http://w3c.github.io/webcomponents/spec/imports/) verheiraten!
+
+```html
+<html manifest="offline.appcache">
+<link rel="import" href="http://example.com/elements.html">
+```
+
+[Demo](demos/caching/appcache-imports/)
+
 ---
 ### Application Cache
 
@@ -181,5 +210,6 @@ Noch was? Jepp! Firefox jagt dem Benutzer Angst ein, indem er beim ersten Besuch
 Weiterführende Literatur:
 
 * [AppCache Facts](http://appcachefacts.info/)
+* [Get off(line)](http://www.webdirections.org/blog/get-offline/)
 * Artikel [Application Cache is a Douchebag](http://alistapart.com/article/application-cache-is-a-douchebag)
 * Präsentation [Application Cache: Douchebag](https://speakerdeck.com/jaffathecake/application-cache-douchebag)

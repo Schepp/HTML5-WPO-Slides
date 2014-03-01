@@ -1,0 +1,14 @@
+<div id="content">
+    <p>Hello World!</p>
+</div>
+
+<script>
+    (function(){
+        var importDoc = document.currentScript.ownerDocument;
+        var mainDoc = document;
+        var content = importDoc.querySelector('#content').innerHTML;
+        window.addEventListener('load', function(){
+            mainDoc.body.innerHTML = content;
+        })
+    }());
+</script>
