@@ -239,3 +239,31 @@ export class q {
 ```
 
 Siehe [ES6 Modules Polyfill](https://github.com/ModuleLoader/es6-module-loader)
+---
+### Die Zukunft
+
+Die Web Components bringen ein Feature namens [HTML Imports](http://www.html5rocks.com/en/tutorials/webcomponents/imports/) mit, das ebenfalls asynchron sein, und Modulabhängigkeiten sicherstellen kann:
+
+```html
+<head>
+    <link rel="import" href="flexslider.html" async>
+    <link rel="import" href="fancybox.html" async>
+</head>
+```
+
+```html
+<!-- flexslider.html -->
+<link rel="import" href="jquery.html">
+<script src="js/flexslider.js"></s​cript>
+```
+
+```html
+<!-- fancybox.html -->
+<link rel="import" href="jquery.html">
+<script src="js/jquery.fancybox.js"></s​cript>
+```
+
+```html
+<!-- jquery.html -->
+<script src="js/jquery.js"></s​cript>
+```

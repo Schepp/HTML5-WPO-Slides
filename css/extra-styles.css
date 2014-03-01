@@ -6,6 +6,9 @@ html.inverted .reveal h1, html.inverted .reveal h2, html.inverted .reveal h3, ht
   color: #FFF;
   text-shadow: 0 0 2px #000, 0 0 4px #000, 0 0 8px #000;
 }
+.reveal pre + pre {
+  margin-top: -1.25em;
+}
 .reveal section img {
   border: none;
   background: transparent;
