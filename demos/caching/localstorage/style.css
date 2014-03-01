@@ -1,0 +1,18 @@
+html {
+    background-color: #EEE;
+}
+
+body {
+    max-width: 960px;
+    margin: 0 auto;
+    font-family: Arial, Helvetica, Sans-Serif;
+}
+
+h1 {
+    color: #550000;
+    font-size: 20px;
+}
+
+p {
+    color: #222;
+}

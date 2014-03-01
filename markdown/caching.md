@@ -1,4 +1,4 @@
-## Klügeres Caching via APIs
+## Klügeres Caching via HTML5 APIs
 ---
 ### Motivation
 
@@ -20,7 +20,7 @@
 | Blackberry OS 6   | Browser            | 25 MB                     |
 | Blackberry OS 7   | Browser            | 85 MB                     |
 
-[Guy Podjarny - Mobile Browser Cache Sizes](http://www.guypo.com/uncategorized/mobile-browser-cache-sizes-round-2/)
+[Quelle](http://www.guypo.com/uncategorized/mobile-browser-cache-sizes-round-2/)
 
 ---
 ### Motivation
@@ -330,7 +330,7 @@ Noch was? Jepp! Firefox jagt dem Benutzer Angst ein, indem er beim ersten Besuch
 
 ![Firefox Sicherheitsabfrage](images/firefox-appcache.png)
 
-Einzige Abhilfe: Serverseitiges Useragent-Sniffing
+Einzige Abhilfe: Serverseitiges Useragent-Sniffing :(
 
 ---
 ### AppCache
@@ -342,3 +342,206 @@ Weiterführende Literatur:
 * Artikel [Application Cache is a Douchebag](http://alistapart.com/article/application-cache-is-a-douchebag)
 * Präsentation [Application Cache: Douchebag](https://speakerdeck.com/jaffathecake/application-cache-douchebag)
 * [HTML Imports](http://www.html5rocks.com/en/tutorials/webcomponents/imports/)
+
+---
+### localStorage
+
+Synchrone API zum Speichern von Key/Value-Paaren:
+
+```js
+localStorage.setItem('key','value');
+var value = localStorage.getItem('key');
+
+localStorage.removeItem('key');
+localStorage.clear(); // Leert ihn komplett
+```
+
+Verarbeitet eigentlich nur Strings...
+
+---
+### localStorage
+
+Kann via `JSON`-Codierung auch Arrays oder Objekte speichern:
+
+```js
+var arr = [0, 1, 2],
+	obj = { 'key1': 0, 'key2': 0 };
+
+localStorage.setItem('arr',JSON.stringify(arr));
+localStorage.setItem('obj',JSON.stringify(obj));
+
+arr = JSON.parse(localStorage.getItem('arr'));
+obj = JSON.parse(localStorage.getItem('obj'));
+```
+---
+### localStorage & JSON
+
+Desktop:
+
+| ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/safari.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| &#10004; | &#10004; | &#10004; | 8+ |
+
+---
+### localStorage & JSON
+
+Mobile:
+
+| ![Chrome](images/browserlogos/android.png) | ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/ios.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| &#10004; | &#10004; | &#10004; | &#10004; | 9+ |
+
+---
+### localStorage
+
+Kann via `base64`-Codierung auch Binärdaten speichern, z.B. von Bildern:
+
+```js
+var image = new Image();
+image.onload = function() {
+	var canvas = document.createElement('canvas');
+	canvas.width = image.width;
+	canvas.height = image.height;
+	canvas.getContext('2d').drawImage(image, 0, 0);
+
+	localStorage.setItem('image',canvas.toDataURL('image/jpeg'));
+
+	var secondImage = new Image();
+	secondImage.src = localStorage.getItem('image');
+}
+image.src = 'picture.jpg';
+```
+---
+### Canvas
+
+Desktop:
+
+| ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/safari.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| &#10004; | &#10004; | &#10004; | 9+ |
+
+---
+### Canvas
+
+Mobile:
+
+| ![Chrome](images/browserlogos/android.png) | ![Chrome](images/browserlogos/chrome.png) | ![Safari](images/browserlogos/ios.png) | ![Firefox](images/browserlogos/firefox.png) | ![IE](images/browserlogos/ie.png) |
+| ------------- | ------------- | ------------- | ------------- | ------------- |
+| &#10004; | &#10004; | &#10004; | &#10004; | 9+ |
+
+---
+## localStorage Quota
+
+<div class="datatable"></div>
+
+| Browser          | KB  |
+|------------------|-------|
+| Chrome 33        | 5.120 |
+| Chrome Mobile 32 | 5.120 |
+| Firefox 27       | 5.120 |
+| IE 11            | 4.883 |
+| Opera 19         | 5.120 |
+| Mobile Safari 7  | 2.560 |
+| Safari 7         | 2.560 |
+
+[Quelle](http://www.stevesouders.com/blog/2014/02/11/measuring-localstorage-performance/)
+---
+### localStorage
+
+Nicht nur nützlich fürs "Cache Pinning", sondern ideal zum Verringern von HTTP-Requests durch bedingtes Inlinen.
+
+---
+### localStorage
+
+#### Erstbesuch
+
+Es werden alle Dateien als `<style>`- und `<script>`-Blöcke ge-inlined
+```html
+<style data-id="a6g7h89f" data-modified="123456789">...</style>
+```
+
+---
+#### Erstbesuch
+
+Nach dem Seitenladen liest ein Script alle Blöcke einzeln aus
+
+1. speichert sie im `localStorage` mit `data-id` als Key und dem Inhalt als Value
+2. setzt einen Cookie mit `data-id` als Key und `data-modified` als Value
+---
+### localStorage
+
+```js
+document.addEventListener('DOMContentLoaded', function() {
+	var items = document.querySelectorAll('style[data-id],script[data-id]');
+	items = Array.prototype.slice.call(items,0);
+	items.forEach(function (item) {
+		var key = item.getAttribute('data-id'),
+			timestamp = item.getAttribute('data-modified'),
+			value = item.textContent;
+
+		localStorage.removeItem(key);
+		localStorage.setItem(key, value);
+		if (localStorage.getItem(key)) {
+			document.cookie = key + '=' + timestamp;
+			console.log('Added/updated ' + key + ' to localStorage');
+		}
+	});
+});
+```
+---
+### localStorage
+
+#### Nachfolgende Besuche
+
+ - Existiert kein Cookie mit dem Key wird die Datei wieder ge-inlined
+ - Existiert der Cookie, stimmt aber das Datum nicht mehr, wird die aktuelle Datei ge-inlined
+ - Existiert der Cookie und stimmt auch das Datum, wird ein Script ausgegeben, das die Datei aus dem `localStorage` holt und ins DOM hängt
+---
+### localStorage
+
+```php
+foreach($files as $file) {
+	$id = md5($file);
+	if(!isset($_COOKIE[$id]) || $_COOKIE[$id] != filemtime($file)) {
+		echo '<script data-id="'.$id.'"
+		data-modified="'.filemtime($file).'">
+		'.file_get_contents($file).'
+		</s​cript>';
+	}
+	else {
+		echo '<script>
+			var script = document.createElement("script");
+			script.textContent = localStorage.getItem("'.$id.'");
+			document.body.appendChild(script);
+		</s​cript>';
+	}
+}
+```
+---
+### localStorage
+
+Vorteile:
+
+- Keine extra Requests für kritische Ressourcen
+- Dennoch kein dauerhaftes Aufblähen des HTMLs
+- Je mehr kleine Dateien, desto besser für spätere Updates
+- Möglichkeiten für echte Delta-Updates via [Diff-Tools](https://github.com/paulgb/simplediff/)
+- Kontrollierbarer als der AppCache
+
+---
+### localStorage
+
+[Demo](demos/caching/localstorage/)
+---
+### localForage
+
+Tipp: [localForage](https://github.com/mozilla/localForage) ist ein Tool von Mozilla, das die localStorage-API aufgreift und:
+
+- mit Callbacks und/oder Promises asynchron macht
+- das Speichern intern auf WebSQL, IndexedDB oder localStorage verteilt
+- das Speichern von Objekten und Arrays ohne Umwandlung erlaubt
+
+---
+### Gruppenarbeit?
+
+Lust die Demo um das Speichern von Bildern, und/oder localForage zu erweitern?

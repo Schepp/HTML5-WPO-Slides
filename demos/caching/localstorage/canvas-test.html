@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas Test</title>
+</head>
+<body>
+<div id="datauri"></div>
+<script>
+    var image = new Image();
+    image.onload = function() {
+        var canvas = document.createElement('canvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        canvas.getContext('2d').drawImage(image, 0, 0);
+
+        document.getElementById('datauri').innerHTML = canvas.toDataURL('image/jpeg');
+    }
+    image.src = '../../../images/prerender.png';
+</script>
+</body>
+</html>

@@ -160,6 +160,12 @@ Mobile:
 * Kann in jeder Seite nur einmal verwendet werden
 * Öffnet eine unsichtbare Browser-Instanz und rendert die angegebene Seite darin
 * Surft der Besucher dann zu dieser Seite weiter, ist sie sofort da
+
+---
+### Prerender
+
+<a href="https://salzundbrot.com">![Prerender Example](images/prerender-example.png)</a>
+
 ---
 ### Prerender
 

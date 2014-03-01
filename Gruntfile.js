@@ -20,7 +20,7 @@ module.exports = function(grunt) {
                 browsers: ['last 2 version']
             },
             no_dest: {
-                src: 'css/extra-styles.css'
+                src: 'css/extra-style.css'
             }
         },
         watch: {
