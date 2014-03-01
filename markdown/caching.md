@@ -201,7 +201,7 @@ Lösung: Ein nahezu leeres HTML Grundgerüst verwenden und die Inhalte nachladen
 <html manifest="offline.appcache">
 <head></head>
 <body>
-    <script>
+    <script>(function(){
         var request = new XMLHttpRequest;
         request.open('GET', 'import.html', true);
         request.onload = function() {
@@ -210,7 +210,7 @@ Lösung: Ein nahezu leeres HTML Grundgerüst verwenden und die Inhalte nachladen
             }
         };
         request.send();
-    </s​cript>
+    }());</s​cript>
 </body>
 </html>
 ```
@@ -232,18 +232,41 @@ Lösung: Ein nahezu leeres HTML Grundgerüst verwenden und die Inhalte nachladen
 
 ```html
 <div id="content"><p>Hello World!</p></div>
-<script>
-    (function(){
-        var importDoc = document.currentScript.ownerDocument,
-        	content = importDoc.querySelector('#content').innerHTML;
-        window.addEventListener('load', function(){
-            document.body.innerHTML = content;
-        })
-    }());
-</s​cript>
+<script>(function(){
+	var importDoc = document.currentScript.ownerDocument,
+		content = importDoc.querySelector('#content').innerHTML;
+	if (document.readyState === 'interactive') {
+		document.body.innerHTML = content;
+	} else {
+		document.addEventListener('DOMContentLoaded', function(){
+			document.body.innerHTML = content;
+		})
+	}
+}());</s​cript>
 ```
 
 [Demo](demos/caching/appcache-imports/)
+---
+### Application Cache + XHR + HTML Imports
+
+```html
+<!DOCTYPE html>
+<html manifest="offline.appcache">
+<head>
+    <link rel="import" href="import.html">
+</head>
+<body>
+    <script>(function(){
+        if(!('import' in document.createElement('link'))){
+			var request = new XMLHttpRequest;
+			...
+		}
+    }());</s​cript>
+</body>
+</html>
+```
+
+[Demo](demos/caching/appcache-xhr-imports/)
 ---
 ### Application Cache
 
@@ -260,3 +283,4 @@ Weiterführende Literatur:
 * [Get off(line)](http://www.webdirections.org/blog/get-offline/)
 * Artikel [Application Cache is a Douchebag](http://alistapart.com/article/application-cache-is-a-douchebag)
 * Präsentation [Application Cache: Douchebag](https://speakerdeck.com/jaffathecake/application-cache-douchebag)
+* [HTML Imports](http://www.html5rocks.com/en/tutorials/webcomponents/imports/)

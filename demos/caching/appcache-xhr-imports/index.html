@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html manifest="offline.appcache">
 <head>
-    <title>AppCache paired with XHR</title>
+    <title>AppCache paired with XHR and HTML Imports</title>
+    <link rel="import" href="import.html">
 </head>
 <body>
-    <script>
-        (function(){
+<script>
+    (function(){
+        if(!('import' in document.createElement('link'))){
             var request = new XMLHttpRequest;
             request.open('GET', 'import.html', true);
             request.onload = function() {
@@ -14,7 +16,8 @@
                 }
             };
             request.send();
-        }());
-    </script>
+        }
+    }());
+</script>
 </body>
 </html>
