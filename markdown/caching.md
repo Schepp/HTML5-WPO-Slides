@@ -537,7 +537,7 @@ Vorteile:
 
 Tipp: [localForage](https://github.com/mozilla/localForage) ist ein Tool von Mozilla, das die localStorage-API aufgreift und:
 
-- mit Callbacks und/oder Promises asynchron macht
+- mit Callbacks und/oder Promises asynchron arbeitet
 - das Speichern intern auf WebSQL, IndexedDB oder localStorage verteilt
 - das Speichern von Objekten und Arrays ohne Umwandlung erlaubt
 
