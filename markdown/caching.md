@@ -41,7 +41,7 @@
 
 [HTTP Archive Trends](http://httparchive.org/trends.php)
 ---
-### Application Cache
+### AppCache
 
 * Eines der prominentesten neuen Features von HTML5
 * Offline Speichern beliebig vieler Ressourcen
@@ -49,7 +49,7 @@
 
 [Demo](demos/caching/appcache/)
 ---
-### Application Cache
+### AppCache
 
 Desktop:
 
@@ -58,7 +58,7 @@ Desktop:
 | &#10004; | &#10004; | &#10004; | 10+ |
 
 ---
-### Application Cache
+### AppCache
 
 Mobile:
 
@@ -67,7 +67,7 @@ Mobile:
 | 2.1+ | &#10004; | &#10004; | &#10004; | 10+ |
 
 ---
-### Application Cache
+### AppCache
 
 Leider das Enfant Terrible von HTML5:
 
@@ -75,7 +75,7 @@ Leider das Enfant Terrible von HTML5:
 
 [Jack Archibald](http://alistapart.com/article/application-cache-is-a-douchebag)
 ---
-### Application Cache
+### AppCache
 
 ```html
 <html manifest="offline.appcache">
@@ -94,7 +94,7 @@ assets/style/images/sprite.png
 
 Die aufgelisteten Ressourcen werden alle offline gespeichert und ab dem nächsten Aufruf der referenzierenden HTML-Seite von Platte bezogen.
 ---
-### Application Cache
+### AppCache
 
 ```html
 <html manifest="offline.appcache">
@@ -106,7 +106,7 @@ Der Browser stellt also in Zukunft immer dieselben Inhalte dar, sofern diese wie
 
 **WTF?**
 ---
-### Application Cache
+### AppCache
 
 Weil die HTML-Datei mitgespeichert wird, bringt es auch nichts, wenn man mit klassischen Cachebusting-Methoden Updates erzwingen will:
 
@@ -116,7 +116,7 @@ Weil die HTML-Datei mitgespeichert wird, bringt es auch nichts, wenn man mit kla
 
 Die Änderungen passiert online und nicht offline beim User. Bringt also nichts!
 ---
-### Application Cache
+### AppCache
 
 Die einzige Möglichkeit, den Browser zum Aktualisieren von Ressourcen zu bewegen, ist die Manifestdatei inhaltlich zu verändern, z.B. durch eine integrierte Versionsnummer:
 
@@ -131,19 +131,19 @@ assets/style/images/sprite.png
 ```
 
 ---
-### Application Cache
+### AppCache
 
 **Achtung:** Niemals Far-Future Cache Header für die Manifest-Datei setzen, weil man sonst keine Möglichkeit mehr hat, Dateien zu aktualisieren.
 
 Der Besucher bliebe in der Vergangenheit gefangen.
 
 ---
-### Application Cache
+### AppCache
 
 Apropos Cache-Header: Der Application Cache ist eine zweite Cache-Layer über dem üblichen clientseitigen Cache. Daher ist es weiterhin sinnvoll, alle Ressourcen mit Far-Future Cache Headern auszustatten, so dass die Browser nur die wirklich aktualisierten Dateien beim Updaten des Manifests vom Server lädt.
 
 ---
-### Application Cache
+### AppCache
 
 ```
 CACHE MANIFEST
@@ -158,11 +158,11 @@ assets/style/images/sprite.png
 Der Browser checkt und verarbeitet das Manifest immer erst **nach Ende des Seitenladens**. Sprich, neue Dateien manifestieren sich erst **beim übernächsten Aufruf**.
 
 ---
-### Application Cache
+### AppCache
 
 ![HTML5 AppCache Update Behavior](images/HTML5%20AppCache%20Update%20Behavior.png)
 ---
-### Application Cache
+### AppCache
 
 Ressourcen, die nicht im Manifest stehen, im HTML/CSS/JS aber referenziert werden, werden bei aktivem Offline-Modus nicht mehr geladen - auch dann nicht, wenn eine Onlineverbindung zu ihnen besteht. Abhilfe schafft der `NETWORK`-Eintrag:
 
@@ -175,7 +175,7 @@ NETWORK:
 *
 ```
 ---
-### Application Cache
+### AppCache
 
 ```
 CACHE MANIFEST
@@ -188,15 +188,16 @@ NETWORK:
 
 Das funktioniert dummerweise nur mit der HTML-Datei selbst nicht!!! Args...
 ---
-### Application Cache
+### AppCache
 
 Lösung: Ein nahezu leeres HTML Grundgerüst verwenden und die Inhalte nachladen:
 
 * via XHR, oder
+* via XHR + localStorage, oder
 * via [HTML Imports](http://w3c.github.io/webcomponents/spec/imports/), oder
 * via beidem (Featuredetection)
 ---
-### Application Cache + XHR
+### AppCache + XHR
 
 ```html
 <!DOCTYPE html>
@@ -207,9 +208,7 @@ Lösung: Ein nahezu leeres HTML Grundgerüst verwenden und die Inhalte nachladen
         var request = new XMLHttpRequest;
         request.open('GET', 'import.html', true);
         request.onload = function() {
-            if ( request.status >= 200 && request.status < 400 ){
-                document.body.innerHTML = request.responseText;
-            }
+            document.body.innerHTML = request.responseText;
         };
         request.send();
     }());</s​cript>
@@ -220,7 +219,31 @@ Lösung: Ein nahezu leeres HTML Grundgerüst verwenden und die Inhalte nachladen
 [Demo](demos/caching/appcache-xhr/)
 
 ---
-### Application Cache + HTML Imports
+### AppCache + XHR + localStorage
+
+```js
+(function(){
+	var request = new XMLHttpRequest;
+	request.open('GET', 'import.html', true);
+	if(content = localStorage.getItem('import.html')) {
+		document.body.innerHTML = content;
+		request.onload = function() {
+			localStorage.setItem('import.html', request.responseText);
+		};
+	} else {
+		request.onload = function() {
+			localStorage.setItem('import.html', request.responseText);
+			document.body.innerHTML = request.responseText;
+		};
+	}
+	request.send();
+}());
+```
+
+[Demo](demos/caching/appcache-xhr-localstorage/)
+
+---
+### AppCache + HTML Imports
 
 ```html
 <!DOCTYPE html>
@@ -249,7 +272,7 @@ Lösung: Ein nahezu leeres HTML Grundgerüst verwenden und die Inhalte nachladen
 
 [Demo](demos/caching/appcache-imports/)
 ---
-### Application Cache + XHR + HTML Imports
+### AppCache + XHR + HTML Imports
 
 ```html
 <!DOCTYPE html>
@@ -270,14 +293,14 @@ Lösung: Ein nahezu leeres HTML Grundgerüst verwenden und die Inhalte nachladen
 
 [Demo](demos/caching/appcache-xhr-imports/)
 ---
-### Application Cache
+### AppCache
 
 Noch was? Jepp! Firefox jagt dem Benutzer Angst ein, indem er beim ersten Besuch danach fragt, ob die Seite Daten offline speichern darf:
 
 ![Firefox Sicherheitsabfrage](images/firefox-appcache.png)
 
 ---
-### Application Cache
+### AppCache
 
 Weiterführende Literatur:
 

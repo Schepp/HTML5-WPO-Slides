@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html manifest="offline.appcache">
+<head>
+    <title>AppCache paired with XHR + localStorage</title>
+</head>
+<body>
+    <script>
+        (function(){
+            var request = new XMLHttpRequest;
+            request.open('GET', 'import.html', true);
+            if(content = localStorage.getItem('import.html')) {
+                document.body.innerHTML = content;
+                request.onload = function() {
+                    localStorage.setItem('import.html', request.responseText);
+                };
+            } else {
+                request.onload = function() {
+                    localStorage.setItem('import.html', request.responseText);
+                    document.body.innerHTML = request.responseText;
+                };
+            }
+            request.send();
+        }());
+    </script>
+</body>
+</html>
