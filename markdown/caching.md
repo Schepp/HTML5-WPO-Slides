@@ -544,4 +544,14 @@ Tipp: [localForage](https://github.com/mozilla/localForage) ist ein Tool von Moz
 ---
 ### Gruppenarbeit?
 
-Lust die Demo um das Speichern von Bildern, und/oder localForage zu erweitern?
+Lust die Demo zu erweitern:
+
+- um das Speichern von Bildern?
+- oder um localForage?
+- oder mit Delta-Updates (schwer)
+---
+### Zukunft: ServiceWorker
+
+[The Service Worker Specification](https://github.com/slightlyoff/ServiceWorker/)
+
+ETA: Anfang 2015

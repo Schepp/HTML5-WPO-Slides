@@ -12,11 +12,12 @@
 	margin-top: -1.25em;
   }
 
-  section img {
+  section img,
+  section video {
 	border: none;
 	background: transparent;
 	box-shadow: none;
-	filter: drop-shadow(0 0 1px #333) drop-shadow(0 0 4px #FFF) drop-shadow(0 0 8px #FFF);
+	filter: drop-shadow(0 0 1px #CCC) drop-shadow(0 0 10px #FFF);
   }
 
   li {
