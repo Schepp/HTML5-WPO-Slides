@@ -27,15 +27,94 @@ Ergänzend zum Hauptprozessor, der **C**entral **P**rocessing **U**nit, gibt es 
 5. BUS: Fertige Kacheln wandern zur GPU (je 256 KB)
 6. GPU: Tapeziert leere Fläche mit empfangenen Kacheln
 ---
-<video controls src="images/Nexus%207%20Scroll%20Screencapture.mp4" preload="none" poster="images/Nexus%207%20Scroll%20Screencapture.png" width="342" height="474"></video>
+<video src="images/Nexus%207%20Scroll%20Screencapture.mp4" preload="none" poster="images/Nexus%207%20Scroll%20Screencapture.png" width="342" height="474" controls loop></video>
 
 [Demo](demos/mobile-rendering-performance/examples/scrolling/bad.html)
+---
+
+![Tiles](images/tiles.png)
 ---
 ### Vorbereitendes Rendering
 
 Einmal erledigt bereitet der Browser diejenigen Bereiche vor, die bei einem Scrollvorgang als
 nächstes in den sichtbaren Bildausschnitt rücken würden.
 
-Wie viel er vorbereitet hängt von der freien Speicherkapazität des jeweiligen Geräts ab.
+Wie viel er vorbereitet hängt von der freien Speicherkapazität des jeweiligen Geräts ab: Die Fläche eines Full-HD Bildschirms frisst 8 x 5 Kacheln = 10 MB.
 ---
 ![GPU](images/vorrendern.png)
+---
+![GPU](images/surfacemapping.png)
+
+Die GPU arbeitet intern mit texturierten 3D-Flächen
+
+---
+### Scrolling
+
+Das Scrolling übernimmt nun komplett die GPU, in dem Sie die 3D-Fläche herumschiebt.
+
+---
+<video src="images/scrolling.mp4" preload="none" poster="images/scrolling.png" width="1280" height="720" controls loop></video>
+
+---
+### Scrolling
+
+* **Vorteil:** 3D-Flächen Herumschieben ist eine Spezialität der GPU - es geht blitzschnell!
+* **Vorteil:** Vor allem eine mobile CPU wäre überfordert und wird komplett entlastet.
+
+---
+### Scrolling
+
+* **Nachteil:** Während des Scrollens nimmt die GPU keine Paint-Updates entgegen (Animated GIFs bleiben z.B. stehen)
+* **Nachteil:** Da die CPU außen vor bleibt, empfängt sie keinerlei `onscroll`-Events von der GPU
+
+---
+### Offcanvas Menüs
+
+![GPU](images/offcanvas-menu.gif)
+---
+### Offcanvas Menüs
+
+* Verstecktes Menü **niemals** auf `display: none` stellen, sonst kann es nicht vorgerendert werden.
+* Menü ausschließlich mit `transform: translateX` bewegen
+* Menü ausschließlich mit `transition` oder `animation` animieren
+* Menü von Anfang an mit `transform: translateZ(0)` in eine eigene Compositing Layer Promoten
+---
+### Transform
+
+> Menü ausschließlich mit `transform: translateX` bewegen
+
+Durch `transform: translateX` kann es bewegt werden, ohne für den Rest der Seite einen "Reflow" auszulösen.
+---
+### Transform
+
+* Mit `transform` veränderte Elemente hinterlassen ihren ursprünglichen Footprint in der Seite.
+* Mit `transform` veränderte Elemente erzeugen einen komplett [neuen Stacking Context](http://codepen.io/Schepp/pen/dxpFj)
+---
+### Offcanvas Menüs
+
+> * Menü ausschließlich mit `transform: translateX` bewegen
+* Menü ausschließlich mit `transition` oder `animation` animieren
+
+Startet eine CSS Animation, die auf `transform` oder `opacity` abzielt, löst der Browser das Element von der aktuellen Zeichenebene aus, und erzeugt in der GPU eine zweite Ebene mit dem Element.
+
+Dieses
+---
+### Hardwarebeschleunigtes Compositing
+---
+> **Compositing** (englisch für Zusammensetzung, Mischung) ist ein Begriff aus der Video- und Filmtechnik und findet in der Postproduktion eines Filmes als visueller Effekt Anwendung. Im Compositing werden zwei oder mehr voneinander getrennt aufgenommene oder erstellte Elemente zu einem Bild zusammengeführt. In der Computergrafik versteht man unter Compositing das Zusammenfügen mehrerer hintereinanderliegender Schichten eines Volumens.
+
+[Wikipedia](http://de.wikipedia.org/wiki/Compositing)
+---
+### Kein aktives Compositing
+
+![No Compositing](images/The_CSS_and_GPU-074.jpg)
+---
+### Aktives Compositing
+
+![No Compositing](images/The_CSS_and_GPU-075.jpg)
+---
+### Weiterführende Literatur
+
+* [Jankfree](http://jankfree.org/)
+* [Web Page Design with the GPU in Mind](http://www.youtube.com/watch?v=8uAYE5G1gSs&index=22&list=PLZYZ2RjeQoPi_zyxLjCdxZi5s44WtICMG)
+* [A developer's guide to rendering performance](http://vimeo.com/77591536)
