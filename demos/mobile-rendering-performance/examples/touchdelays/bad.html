@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mobile Rendering Performance</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 200%;
+}
+p {
+	padding: 20px;
+}
+ul, li {
+	display: block;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	
+}
+li {
+	padding: 10px;
+	border-top: 1px solid #CCC;
+}
+#menu {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	right: 0;
+	display: none;
+	background-color: #FCFCFC;
+	border: 1px solid #CCC;
+	border-top: none;
+}
+#menu.visible {
+	display: block;
+}
+</style>
+</head>
+<body>
+<ul id="menu">
+	<li>Entry One</li>
+	<li>Entry Two</li>
+	<li>Entry Three</li>
+	<li>Entry Four</li>
+</ul>
+<p><a href="#menu">Show menu!</a></p>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="../../js/prefixfree.min.js"></script>
+<script>
+$('a[href="#menu"]')
+.on('touchstart', function(e){
+	window.start = (new Date()).getTime();
+})
+.on('click', function(e){
+	e.preventDefault();
+	if(window.start){
+		var end = (new Date()).getTime();
+		document.write((end - window.start) + 'ms<br>');
+	}
+	$('#menu').toggleClass('visible');
+});
+</script>
+</body>
+</html>

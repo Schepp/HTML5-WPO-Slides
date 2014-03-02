@@ -27,9 +27,9 @@ Ergänzend zum Hauptprozessor, der **C**entral **P**rocessing **U**nit, gibt es 
 5. BUS: Fertige Kacheln wandern zur GPU (je 256 KB)
 6. GPU: Tapeziert leere Fläche mit empfangenen Kacheln
 ---
-### Renderingablauf
-
 <video controls src="images/Nexus%207%20Scroll%20Screencapture.mp4" preload="none" poster="images/Nexus%207%20Scroll%20Screencapture.png" width="342" height="474"></video>
+
+[Demo](demos/mobile-rendering-performance/examples/scrolling/bad.html)
 ---
 ### Vorbereitendes Rendering
 
@@ -38,5 +38,4 @@ nächstes in den sichtbaren Bildausschnitt rücken würden.
 
 Wie viel er vorbereitet hängt von der freien Speicherkapazität des jeweiligen Geräts ab.
 ---
-### Renderingablauf
-
+![GPU](images/vorrendern.png)

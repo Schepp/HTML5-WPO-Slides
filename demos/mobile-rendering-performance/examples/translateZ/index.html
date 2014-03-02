@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mobile Rendering Performance</title>
+<style>
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+div {
+	position: absolute;
+	width: 33%;
+	background: #FFF;
+	border: 1px solid #CCC;
+	transform: translateZ(0);
+}
+p {
+	padding: 20px;
+}
+img {
+	width: 100%;
+	height: auto;
+}
+b {
+	position: absolute;
+	background: rgba(255,255,255,.5);
+	font-size: 300%;
+	line-height: 1;
+}
+</style>
+</head>
+<body>
+<button id="start">Start!</button>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="../../js/prefixfree.min.js"></script>
+<script>
+$('#start').click(function(){
+	for(var i=0; i<100; i++){
+		(function(i){
+			window.setTimeout(function(){
+				$('body').prepend('<div style="left:' + (i * 4) + 'px;top:' + (i * 10) + 'px"><p><b>' + (i * 4) + '.</b><img src="../../img/2824257885_14c8a22eeb_o.jpg" width="1024" height="1024"></p></div>');
+			},100 * i);
+		})(i);
+	}
+});
+</script>
+</body>
+</html>

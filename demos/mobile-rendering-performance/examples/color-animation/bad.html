@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mobile Rendering Performance</title>
+<style>
+html, body {
+	height: 100%;
+}
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background: url(../../img/2824257885_14c8a22eeb_o.jpg);
+	background-size: cover;
+}
+div {
+	position: absolute;
+	left: 20px;
+	width: 100px;
+	height: 100px;
+	background-color: red;
+	box-shadow: 0 0 30px rgba(0,0,0,.5);
+	
+}
+div.transitioned {
+	transition-property: background-color;
+	transition-timing-function: ease-in-out;
+	transition-duration: 5s;
+}
+div.blue {
+	background-color: blue;
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="../../js/prefixfree.min.js"></script>
+</head>
+<body>
+<script>
+for(var i=0; i<10; i++){
+	document.write('<div style="top:' + (20 + (i * 120)) + 'px"></div>');
+}
+
+window.setTimeout(function(){
+	$('div')
+	.addClass('transitioned');
+
+	window.setTimeout(function(){
+		$('div')
+		.addClass('blue')
+		.one('transitionend webkitTransitionEnd',function(){
+			$(this).removeClass('blue');
+		});
+	},100);
+},100);
+</script>
+</body>
+</html>

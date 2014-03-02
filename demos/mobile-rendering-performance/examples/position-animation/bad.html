@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Mobile Rendering Performance</title>
+<style>
+html, body {
+	height: 100%;
+}
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background: url(../../img/2824257885_14c8a22eeb_o.jpg);
+	background-size: cover;
+}
+div {
+	position: absolute;
+	left: 20px;
+	width: 100px;
+	height: 100px;
+	background: #FFF;
+	box-shadow: 0 0 30px rgba(0,0,0,.5);
+}
+</style>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="../../js/prefixfree.min.js"></script>
+<script>
+var divs;
+function animateforth(){
+	divs.animate({
+		'left': '800'
+	},10000,'swing',function(){
+		animateback();
+	});
+}
+function animateback(){
+	divs.animate({
+		'left': '20'
+	},10000,'swing');
+}
+$(document).ready(function(e) {
+	divs = $('div');
+	animateforth();
+});
+</script>
+</head>
+<body>
+<button id="kill">Kill me!</button>
+<script>
+for(var i=0; i<10; i++){
+	document.write('<div style="top:' + (40 + (i * 120)) + 'px"></div>');
+}
+$('#kill').click(function(){
+	var start = +new Date;
+	while (+new Date - start < 2000){}
+});
+</script>
+</body>
+</html>
