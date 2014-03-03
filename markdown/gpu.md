@@ -190,7 +190,7 @@ Beispielseite mit vielen "Paint Storms": [thenextweb.com](http://thenextweb.com/
 
 Wenn der Chrome-Browser mehrere fixed positionierte Elemente auf einer Seite antrifft, fasst er sie ohne extra Eingriff [alle zu einer Layer zusammen](http://www.html5rocks.com/en/tutorials/speed/scrolling/).
 
-Das kann dann [sehr schlecht enden, wenn die Elemente weit auseinander stehen](http://benfrain.com/improving-css-performance-fixed-position-elements/).
+Das kann dann [sehr schlecht enden, wenn die Elemente weit auseinander stehen](http://benfrain.com/improving-css-performance-fixed-position-elements/). Explizite Layer Promotion hilft.
 ---
 ### Silver Bullet?
 
@@ -202,8 +202,129 @@ Das kann dann [sehr schlecht enden, wenn die Elemente weit auseinander stehen](h
 
 Niemals!
 ---
+### Reflows vermeiden
+
+Reflows kosten richtig viel Zeit, da das gesamte Layout **neu berechnet** und **gepainted** werden muss.
+---
+[Diese DOM-Methoden](http://gent.ilcore.com/2011/03/how-not-to-trigger-layout-in-webkit.html), angewendet auf die angegebenen Elemente erzeugen einen Reflow:
+
+* Elemente: `clientHeight`, `clientLeft`, `clientTop`, `clientWidth`, `focus()`, `offsetHeight`, `offsetLeft`, `offsetParent`, `offsetTop`, `offsetWidth`, `scrollHeight`, `scrollLeft`, `scrollTop`, `scrollWidth`
+* Bilder: `height`, `width`
+* window: `getComputedStyle()`, `scrollBy()`, `scrollTo()`, `scrollX`, `scrollY`
+---
+### Reflows vermeiden
+
+```js
+// Read
+var h1 = element1.clientHeight;
+// Write (invalidates layout)
+element1.style.height = (h1 * 2) + 'px';
+
+// Read (triggers layout)
+var h2 = element2.clientHeight;
+// Write (invalidates layout)
+element2.style.height = (h2 * 2) + 'px';
+
+// Read (triggers layout)
+var h3 = element3.clientHeight;
+// Write (invalidates layout)
+element3.style.height = (h3 * 2) + 'px';
+```
+
+Schlecht!
+
+---
+### Reflows vermeiden
+
+```js
+// Read
+var h1 = element1.clientHeight;
+var h2 = element2.clientHeight;
+var h3 = element3.clientHeight;
+
+// Write (invalidates layout)
+element1.style.height = (h1 * 2) + 'px';
+element2.style.height = (h2 * 2) + 'px';
+element3.style.height = (h3 * 2) + 'px';
+```
+
+Reads und Writes batchen: Perfekt!
+---
+### Reflows vermeiden
+
+```js
+// Read
+var h1 = element1.clientHeight;
+
+// Write
+requestAnimationFrame(function() {
+  element1.style.height = (h1 * 2) + 'px';
+});
+
+// Read
+var h2 = element2.clientHeight;
+
+// Write
+requestAnimationFrame(function() {
+  element2.style.height = (h2 * 2) + 'px';
+});
+```
+
+Writes per [requestAnimationFrame](http://www.html5rocks.com/en/tutorials/speed/animations/) in die Zukunft verlegen: <3!
+---
+### Reflows begrenzen
+
+Reflow lassen sich mit Hilfe von "[Layout Boundaries](http://wilsonpage.co.uk/introducing-layout-boundaries/)" begrenzen.
+
+Layout Boundaries sind Elemente mit unverrückbarer Größe, die eine Reflow-Welle ähnlich wie ein Deich stoppen.
+---
+### Layout Boundaries
+
+**Eingebettete SVGs** bilden Layout Boundaries oder Elemente...
+
+* deren `display`weder auf `inline`, noch auf `inline-block`stehen
+* deren `height` nicht in Prozent angegeben ist
+* deren `height` gesetzt, aber nicht `auto` ist
+* deren `width` gesetzt, aber nicht `auto` ist
+* deren `overflow` gesetzt ist (`scroll`, `auto`, `hidden`)
+* die kein Kindelement einer Tabelle sind
+---
+### Layout Boundaries
+
+Tool zum Highlighten von Elementen mit "Layout Boundaries"-Potential:
+
+[Boundarizr](https://github.com/paullewis/Boundarizr/)
+
+---
+### Paint Zeiten reduzieren
+
+Nicht zu viele CSS3-Effekte einsetzen! [Speziell in Kombination werden sie teuer](demos/mobile-rendering-performance/examples/continous-paint/).
+
+Auch wenn es anachronistisch klingt: Im Zweifel besser Bilder verwenden.
+---
+### Zukunft
+
+[Die Browserhersteller arbeiten](http://aerotwist.com/blog/bye-bye-layer-hacks/) an einer neuen CSS-Eigenschaft namens [`will-change`](http://tabatkins.github.io/specs/css-will-change/), die den Browsern signalisiert, dass eine Eigenschaft sich um Lauf des Lebenszyklus' ändern wird:
+
+```css
+html {
+	will-change: scroll-position;
+}
+.itemlist {
+	will-change: contents, scroll-position;
+}
+.animated {
+	will-change: transform, opacity;
+}
+```
+
+---
 ### Weiterführende Literatur
 
 * [Jankfree](http://jankfree.org/)
-* [Scrolling Performance](http://www.html5rocks.com/en/tutorials/speed/scrolling/)* [Web Page Design with the GPU in Mind](http://www.youtube.com/watch?v=8uAYE5G1gSs&index=22&list=PLZYZ2RjeQoPi_zyxLjCdxZi5s44WtICMG)
+* [Scrolling Performance](http://www.html5rocks.com/en/tutorials/speed/scrolling/)
+* [Web Page Design with the GPU in Mind](http://www.youtube.com/watch?v=8uAYE5G1gSs&index=22&list=PLZYZ2RjeQoPi_zyxLjCdxZi5s44WtICMG)
 * [A developer's guide to rendering performance](http://vimeo.com/77591536)
+* [Layout Boundaries](http://wilsonpage.co.uk/introducing-layout-boundaries/)
+* [How (not) to trigger a layout in WebKit](http://gent.ilcore.com/2011/03/how-not-to-trigger-layout-in-webkit.html)
+* [requestAnimationFrame](http://www.html5rocks.com/en/tutorials/speed/animations/)
