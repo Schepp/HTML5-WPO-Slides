@@ -319,12 +319,20 @@ html {
 ```
 
 ---
+### Denkarbeit gefällig?
+
+Wie würdet Ihr [diese Animation](demos/mobile-rendering-performance/examples/color-animation/) ruckelfreier machen?
+
+Es gibt zwei Lösungen. Bonuspunkt für den, der beide Lösungen findet!
+---
 ### Weiterführende Literatur
 
 * [Jankfree](http://jankfree.org/)
 * [Scrolling Performance](http://www.html5rocks.com/en/tutorials/speed/scrolling/)
 * [Web Page Design with the GPU in Mind](http://www.youtube.com/watch?v=8uAYE5G1gSs&index=22&list=PLZYZ2RjeQoPi_zyxLjCdxZi5s44WtICMG)
 * [A developer's guide to rendering performance](http://vimeo.com/77591536)
+* [Fluid User Interface with Hardware Acceleration](http://www.youtube.com/watch?v=gTHAn-nkQnI)
 * [Layout Boundaries](http://wilsonpage.co.uk/introducing-layout-boundaries/)
 * [How (not) to trigger a layout in WebKit](http://gent.ilcore.com/2011/03/how-not-to-trigger-layout-in-webkit.html)
 * [requestAnimationFrame](http://www.html5rocks.com/en/tutorials/speed/animations/)
+* [Tricks for GPU Composited CSS](http://ariya.ofilabs.com/2014/02/tricks-for-gpu-composited-css.html)
