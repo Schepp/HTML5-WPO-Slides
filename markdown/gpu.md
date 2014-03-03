@@ -38,8 +38,13 @@ Ergänzend zum Hauptprozessor, der **C**entral **P**rocessing **U**nit, gibt es 
 
 Einmal erledigt bereitet der Browser diejenigen Bereiche vor, die bei einem Scrollvorgang als
 nächstes in den sichtbaren Bildausschnitt rücken würden.
+---
+### Vorbereitendes Rendering
 
-Wie viel er vorbereitet hängt von der freien Speicherkapazität des jeweiligen Geräts ab: Die Fläche eines Full-HD Bildschirms frisst 8 x 5 Kacheln = 10 MB.
+Wie viel er vorbereitet hängt von der freien Speicherkapazität des jeweiligen Geräts ab:
+
+* Die Fläche eines Full-HD Bildschirms frisst 8 x 5 Kacheln à 256 KB = 10 MB.
+* Die Fläche eines Retina-iPads frisst 8 x 6 Kacheln à 256 KB = 12 MB
 ---
 ![GPU](images/vorrendern.png)
 ---
@@ -47,6 +52,8 @@ Wie viel er vorbereitet hängt von der freien Speicherkapazität des jeweiligen 
 
 Geht der Speicher zur Neige, verwirft der Browser entfernt liegende Kacheln zuerst, z.B. weggescrollte.
 
+---
+![GPU](images/speicher-wiederverwendung.png)
 ---
 ![GPU](images/surfacemapping.png)
 
@@ -135,9 +142,17 @@ Eine promotete Ebene kann einzeln sehr effizient in der GPU transformiert oder d
 
 ![No Compositing](images/The_CSS_and_GPU-074.jpg)
 ---
+### Kein aktives Compositing
+
+![No Compositing](images/duck-paint.png)
+---
 ### Aktives Compositing
 
 ![No Compositing](images/The_CSS_and_GPU-075.jpg)
+---
+### Aktives Compositing
+
+![No Compositing](images/duck-promoted.png)
 ---
 ![No Compositing](images/devtools-composited-layers.png)
 ---
