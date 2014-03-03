@@ -63,24 +63,34 @@
   }
 
   blockquote {
+	quotes: "“" "”" "‘" "’";
+	position: relative;
 	margin-bottom: 1rem;
 	padding: 1rem;
 	background-color: rgba(255,255,255,.9);
+	font-style: italic;
+	text-align: left;
 
-	& + p {
-	  font-style: italic;
-	}
-	> p {
-	  quotes: "“" "”" "‘" "’";
-	}
-	> p:last-child {
+	> *:last-child {
 	  margin-bottom: 0;
 	}
-	> p:first-child:before {
-		content: open-quote ' ';
+	&:before,
+	&:after {
+	  position: absolute;
+	  font-family: Times, serif;
+	  font-size: 150%;
+	  font-weight: bold;
 	}
-	> p:last-child:after {
-		content: ' ' close-quote;
+	&:before {
+	  top: 0;
+	  right: 102%;
+	  content: open-quote;
+	}
+	&:after {
+	  bottom: -20px;
+	  left: 102%;
+	  content: close-quote;
+	  vertical-align: bottom;
 	}
   }
 }

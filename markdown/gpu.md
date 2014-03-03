@@ -96,7 +96,7 @@ Bei "klebenden" Menüs schafft die neue Eigenschaft `position: sticky` Abhilfe (
 * Verstecktes Menü **niemals** auf `display: none` stellen, sonst kann es nicht vorgerendert werden.
 * Menü ausschließlich mit `transform: translateX` bewegen
 * Menü ausschließlich mit `transition` oder `animation` animieren
-* Menü von Anfang an mit `transform: translateZ(0)` in eine eigene Compositing Layer Promoten
+* Menü von Anfang an mit `backface-visibility: hidden` in eine eigene Compositing Layer promoten
 ---
 ### Transform
 
@@ -114,13 +114,16 @@ Durch `transform: translateX` kann es bewegt werden, [ohne für den Rest der Sei
 > * Menü ausschließlich mit `transform: translateX` bewegen
 * Menü ausschließlich mit `transition` oder `animation` animieren
 
-Startet eine CSS Animation, die auf `transform` oder `opacity` abzielt, löst der Browser das Element von der aktuellen Zeichenebene aus, und erzeugt in der GPU eine zweite Ebene mit dem Element. Sie wird "in eine eigene Layer promoted". Nach der Animation werden die Ebenen wieder vereint.
 ---
 ### Transform/Opacity Animationen
 
-Eine promotete Ebene kann einzeln sehr effizient in der GPU transformiert oder durchsichtig gemacht werden, ohne dass der Rest der Seite angefasst werden muss. Und ohne dass die CPU etwas damit zu tun hat.
+Startet eine CSS Animation, die auf `transform`, `opacity` oder `filter` (außer dem Blur-Filter) abzielt, löst der Browser das Element von der aktuellen Zeichenebene aus, und erzeugt in der GPU eine zweite Ebene mit dem Element. Sie wird "in eine eigene Layer promoted".
 
-Zur Darstellung werden beide Ebenen per Compositing visuell verschmolzen.
+Nach der Animation werden die Ebenen wieder vereint.
+---
+### Transform/Opacity Animationen
+
+Eine promotete Ebene kann einzeln sehr effizient in der GPU transformiert oder durchsichtig gemacht werden, ohne dass der Rest der Seite angefasst werden muss. Und ohne dass die CPU etwas damit zu tun hat (siehe [vorher](demos/mobile-rendering-performance/examples/position-animation/bad.html)/[nachher](demos/mobile-rendering-performance/examples/position-animation/good.html).
 ---
 ### Compositing
 ---
@@ -136,22 +139,71 @@ Zur Darstellung werden beide Ebenen per Compositing visuell verschmolzen.
 
 ![No Compositing](images/The_CSS_and_GPU-075.jpg)
 ---
+![No Compositing](images/devtools-composited-layers.png)
+---
 ### Compositing erzwingen
 
-> * Menü von Anfang an mit `transform: translateZ(0)` in eine eigene Compositing Layer Promoten
+> * Menü von Anfang an mit `backface-visibility: hidden` in eine eigene Compositing Layer promoten
 
-`transform: translateZ(0)` oder `backface-visibility: hidden` zwingen ein Element immer in eine eigene Ebene.
+`backface-visibility: hidden` und `transform: translateZ(0)` zwingen ein Element immer in eine eigene Ebene.
 
 Sinnvoll, wenn eine Layer später sowieso promoted wird.
 ---
 ### Compositing
 
-> Eine promotete Ebene kann einzeln sehr effizient in der GPU transformiert [...] werden, [...] ohne dass die COU etwas damit zu tun hat.
+> Eine promotete Ebene kann einzeln sehr effizient in der GPU transformiert [...] werden, [...] ohne dass die CPU etwas damit zu tun hat.
 
-Gut bei Blockaden des UI-Threads (z.B. durch JavaScript)! ([vorher](demos/mobile-rendering-performance/examples/loader/bad.html)/[nachher](demos/mobile-rendering-performance/examples/loader/bad.html))
+Gut bei Blockaden des UI-Threads (z.B. durch JavaScript)! (siehe [vorher](demos/mobile-rendering-performance/examples/loaders/bad.html)/[nachher](demos/mobile-rendering-performance/examples/loaders/bad.html))
+---
+### Compositing
+
+> Eine promotete Ebene kann einzeln sehr effizient in der GPU transformiert [...] werden, [...] ohne dass die CPU etwas damit zu tun hat.
+
+Auch ein gutes Mittel gegen sogenannte "Paint Storms".
+
+Beispielseite mit vielen "Paint Storms": [thenextweb.com](http://thenextweb.com/)
+---
+<video src="images/paint-storm.mp4" preload="none" poster="images/paint-storm.png" width="1240" height="720" controls loop></video>
+
+---
+### Compositing
+
+**Nachteil:** Jede promotete Layer verbraucht zusätzlichen Speicher, und zwar mindestens `Pixel x Pixel x 4 Bytes` (bei Retina 4 mal so viel)
+---
+### Implizite Layer Promotion
+
+* Elemente mit `position: fixed`*
+* Elemente mit `overflow-scrolling: touch`
+* Elemente, die gelayerte Elemente überlappen
+* `html`/Root, Video, Canvas Elemente
+* iFrames
+
+*= in Chrome nur auf HiDPI-Displays, wegen Schriftglättung
+---
+### Position: fixed auf Chrome
+
+> You might wonder why we don’t automatically promote fixed position elements. The answer is: we do for high DPI screens, but we don’t for low DPI because we lose sub-pixel antialiasing on text, and that’s not something we want to by default. On high DPI screens you can’t tell, so it’s safe there.
+
+[Paul Lewis](http://benfrain.com/improving-css-performance-fixed-position-elements/)
+---
+### Union of Damaged Regions
+
+Wenn der Chrome-Browser mehrere fixed positionierte Elemente auf einer Seite antrifft, fasst er sie ohne extra Eingriff [alle zu einer Layer zusammen](http://www.html5rocks.com/en/tutorials/speed/scrolling/).
+
+Das kann dann [sehr schlecht enden, wenn die Elemente weit auseinander stehen](http://benfrain.com/improving-css-performance-fixed-position-elements/).
+---
+### Silver Bullet?
+
+```css
+*, *:before, *:after {
+    backface-visibility: hidden;
+}
+```
+
+Niemals!
 ---
 ### Weiterführende Literatur
 
 * [Jankfree](http://jankfree.org/)
-* [Web Page Design with the GPU in Mind](http://www.youtube.com/watch?v=8uAYE5G1gSs&index=22&list=PLZYZ2RjeQoPi_zyxLjCdxZi5s44WtICMG)
+* [Scrolling Performance](http://www.html5rocks.com/en/tutorials/speed/scrolling/)* [Web Page Design with the GPU in Mind](http://www.youtube.com/watch?v=8uAYE5G1gSs&index=22&list=PLZYZ2RjeQoPi_zyxLjCdxZi5s44WtICMG)
 * [A developer's guide to rendering performance](http://vimeo.com/77591536)

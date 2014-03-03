@@ -54,22 +54,31 @@ html.inverted .reveal h1, html.inverted .reveal h2, html.inverted .reveal h3, ht
   text-align: left;
 }
 .reveal blockquote {
+  quotes: "“" "”" "‘" "’";
+  position: relative;
   margin-bottom: 1rem;
   padding: 1rem;
   background-color: rgba(255, 255, 255, 0.9);
-}
-.reveal blockquote + p {
   font-style: italic;
+  text-align: left;
 }
-.reveal blockquote > p {
-  quotes: "“" "”" "‘" "’";
-}
-.reveal blockquote > p:last-child {
+.reveal blockquote > *:last-child {
   margin-bottom: 0;
 }
-.reveal blockquote > p:first-child:before {
-  content: open-quote ' ';
+.reveal blockquote:before, .reveal blockquote:after {
+  position: absolute;
+  font-family: Times, serif;
+  font-size: 150%;
+  font-weight: bold;
 }
-.reveal blockquote > p:last-child:after {
-  content: ' ' close-quote;
+.reveal blockquote:before {
+  top: 0;
+  right: 102%;
+  content: open-quote;
+}
+.reveal blockquote:after {
+  bottom: -20px;
+  left: 102%;
+  content: close-quote;
+  vertical-align: bottom;
 }
