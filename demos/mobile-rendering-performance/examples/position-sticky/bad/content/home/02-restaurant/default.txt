@@ -1,0 +1,21 @@
+Title: Restaurant
+----
+Headline: Speisen wie in einem orientalischen Palais
+----
+Text: Das Innere des denkmalgeschützten Gebäudes macht dem Namen „ArabesQ“ alle Ehre. Arabische Kunsthandwerker haben die Räume meisterhaft mit Mosaiken, Zedernholz-Schnitzwerk und Stuck-Arabesken gestaltet. Auf der lauschigen Sommerterrasse, inspiriert von arabischen Patios, können Sie unsere Speisen und Getränke auch unter freiem Himmel genießen.
+
+Das ArabesQ Restaurant **öffnet täglich um 12 Uhr seine Pforten** für Sie – entdecken Sie unseren Mittagstisch mit köstlichen Mezze-Spezialitäten, Suppen und Salaten!
+
+**Von 18 bis 22 Uhr** haben Sie dann die volle Auswahl aus unserer Abendkarte.
+
+Und **Sonntags ab 11 Uhr** verwöhnen wir unsere Gäste mit einem reichhaltigen Büffet mit warmen und kalten Spezialitäten des Orients.
+
+Werfen Sie einen Blick in unsere <a href="./assets/downloads/Speisekarte.pdf">Speisekarte (PDF, 327 KB)</a>.
+
+Gerne halten wir Ihnen einen Tisch frei. Rufen Sie uns an unter der
+**+49 (0) 211-618 55 181** oder nutzen Sie unsere <a href="#void" id="reservierung">Online Reservierung</a>.
+
+Nicht zuletzt können Sie bei uns auch einen **Gutschein** zum Verschenken erwerben.
+----
+Infos:
+

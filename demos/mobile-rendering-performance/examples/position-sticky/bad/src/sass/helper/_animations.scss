@@ -1,0 +1,26 @@
+@keyframes blink {
+  from {
+	color: rgba(255,255,255,1);
+  }
+  to {
+	color: rgba(150,150,150,1);
+  }
+}
+
+@keyframes slide {
+  0%{
+	opacity: 1;
+  }
+  #{1.167 * (100% / $slide-count)} {
+	opacity:1;
+  }
+  #{1.333 * (100% / $slide-count)} {
+	opacity: 0;
+  }
+  #{100% - (16% / $slide-count)} {
+	opacity:0;
+  }
+  100% {
+	opacity:1;
+  }
+}

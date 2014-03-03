@@ -1,0 +1,108 @@
+.menu-section {
+  padding-top: 80px;
+
+  &:nth-child(1){
+    padding-top: 0;
+  }
+}
+.section {
+  margin: 10px auto 10px auto;
+  background-size: cover;
+}
+
+.separator {
+  position: relative;
+  display: block;
+  max-width: 600px;
+  height: 82px;
+  margin: 10px auto 50px auto;
+  background: url("../images/separator.png") no-repeat center center;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 52px;
+    left: 0;
+    right: 0;
+    display: block;
+    height: 2px;
+    //background-color: #999;
+	background-image: linear-gradient(to right,#000,#CCC 50%,#000);
+    //border-top: 1px solid #CCC;
+  }
+}
+
+.background {
+  @extend %border;
+
+  position: relative;
+  padding: 25px;
+
+  &,
+  .slide {
+	background-repeat: no-repeat;
+	background-size: cover;
+  }
+
+  .slide {
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	opacity: 0;
+	animation-name: slide;
+	animation-duration: $slide-animation-duration;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+
+	@for $i from 1 through $slide-count {
+	  &:nth-child(#{$i}){
+		animation-delay: $slide-animation-duration - ($slide-animation-duration-perslide * $i);
+	  }
+	}
+  }
+}
+
+.content {
+  @extend %textbox;
+
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  margin: 25px auto;
+  padding: 25px;
+
+  a {
+    color: inherit;
+    font-weight: bold;
+  }
+  p:first-child:first-letter {
+    font-family: "Times New Roman", Times, serif;
+    font-size: $root-fontsize * 2.5;
+    font-weight: normal;
+    line-height: 25px;
+  }
+  @media only screen and (min-width: 900px){
+    .menu-section:nth-of-type(2n+1) & {
+      margin-right: 25px;
+    }
+
+    .menu-section:nth-of-type(2n+2) & {
+      margin-left: 25px;
+    }
+  }
+}
+
+.infos {
+  max-width: 500px;
+  margin: 50px auto;
+ // text-align: left;
+
+  ul {
+    display: inline-block;
+    padding-left: 20px;
+    text-align: left;
+  }
+}

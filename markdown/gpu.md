@@ -43,6 +43,11 @@ Wie viel er vorbereitet hängt von der freien Speicherkapazität des jeweiligen 
 ---
 ![GPU](images/vorrendern.png)
 ---
+### Vorbereitendes Rendering
+
+Geht der Speicher zur Neige, verwirft der Browser entfernt liegende Kacheln zuerst, z.B. weggescrollte.
+
+---
 ![GPU](images/surfacemapping.png)
 
 Die GPU arbeitet intern mit texturierten 3D-Flächen
@@ -58,14 +63,28 @@ Das Scrolling übernimmt nun komplett die GPU, in dem Sie die 3D-Fläche herumsc
 ---
 ### Scrolling
 
-* **Vorteil:** 3D-Flächen Herumschieben ist eine Spezialität der GPU - es geht blitzschnell!
-* **Vorteil:** Vor allem eine mobile CPU wäre überfordert und wird komplett entlastet.
+Vorteile
+
+* 3D-Flächen Herumschieben ist eine Spezialität der GPU - es geht blitzschnell!
+* Vor allem eine mobile CPU wäre überfordert und wird komplett entlastet.
 
 ---
 ### Scrolling
 
-* **Nachteil:** Während des Scrollens nimmt die GPU keine Paint-Updates entgegen (Animated GIFs bleiben z.B. stehen)
-* **Nachteil:** Da die CPU außen vor bleibt, empfängt sie keinerlei `onscroll`-Events von der GPU
+Nachteile auf Mobilgeräten
+
+* Während des Scrollens nimmt die GPU keine Paint-Updates entgegen (Animated GIFs bleiben z.B. stehen)
+* Da die CPU außen vor bleibt, empfängt sie keinerlei `onscroll`-Events von der GPU*
+
+Kuriosum: Fixed positionierte Animated GIFs [werden weiterhin animiert](demos/mobile-rendering-performance/examples/scrolling-with-loader/)!
+
+*= Chrome auf Android wählt einen Mittelweg und updated zwischendurch.
+---
+### Scrolling
+
+> Da die CPU außen vor bleibt, empfängt sie keinerlei `onscroll`-Events von der GPU
+
+Bei "klebenden" Menüs schafft die neue Eigenschaft `position: sticky` Abhilfe ([vorher](demos/mobile-rendering-performance/examples/position-sticky/bad/)/[nachher](demos/mobile-rendering-performance/examples/position-sticky/good/)). Unterstützen bisher nur die [Safaris](http://caniuse.com/css-sticky).
 
 ---
 ### Offcanvas Menüs
@@ -83,23 +102,27 @@ Das Scrolling übernimmt nun komplett die GPU, in dem Sie die 3D-Fläche herumsc
 
 > Menü ausschließlich mit `transform: translateX` bewegen
 
-Durch `transform: translateX` kann es bewegt werden, ohne für den Rest der Seite einen "Reflow" auszulösen.
+Durch `transform: translateX` kann es bewegt werden, [ohne für den Rest der Seite](http://codepen.io/Schepp/pen/zafdj) einen "Reflow" auszulösen.
 ---
 ### Transform
 
-* Mit `transform` veränderte Elemente hinterlassen ihren ursprünglichen Footprint in der Seite.
+* Mit `transform` veränderte Elemente [hinterlassen ihren ursprünglichen Footprint](http://codepen.io/Schepp/pen/zafdj) in der Seite.
 * Mit `transform` veränderte Elemente erzeugen einen komplett [neuen Stacking Context](http://codepen.io/Schepp/pen/dxpFj)
 ---
-### Offcanvas Menüs
+### Transform/Opacity Animationen
 
 > * Menü ausschließlich mit `transform: translateX` bewegen
 * Menü ausschließlich mit `transition` oder `animation` animieren
 
-Startet eine CSS Animation, die auf `transform` oder `opacity` abzielt, löst der Browser das Element von der aktuellen Zeichenebene aus, und erzeugt in der GPU eine zweite Ebene mit dem Element.
-
-Dieses
+Startet eine CSS Animation, die auf `transform` oder `opacity` abzielt, löst der Browser das Element von der aktuellen Zeichenebene aus, und erzeugt in der GPU eine zweite Ebene mit dem Element. Sie wird "in eine eigene Layer promoted". Nach der Animation werden die Ebenen wieder vereint.
 ---
-### Hardwarebeschleunigtes Compositing
+### Transform/Opacity Animationen
+
+Eine promotete Ebene kann einzeln sehr effizient in der GPU transformiert oder durchsichtig gemacht werden, ohne dass der Rest der Seite angefasst werden muss. Und ohne dass die CPU etwas damit zu tun hat.
+
+Zur Darstellung werden beide Ebenen per Compositing visuell verschmolzen.
+---
+### Compositing
 ---
 > **Compositing** (englisch für Zusammensetzung, Mischung) ist ein Begriff aus der Video- und Filmtechnik und findet in der Postproduktion eines Filmes als visueller Effekt Anwendung. Im Compositing werden zwei oder mehr voneinander getrennt aufgenommene oder erstellte Elemente zu einem Bild zusammengeführt. In der Computergrafik versteht man unter Compositing das Zusammenfügen mehrerer hintereinanderliegender Schichten eines Volumens.
 
@@ -112,6 +135,20 @@ Dieses
 ### Aktives Compositing
 
 ![No Compositing](images/The_CSS_and_GPU-075.jpg)
+---
+### Compositing erzwingen
+
+> * Menü von Anfang an mit `transform: translateZ(0)` in eine eigene Compositing Layer Promoten
+
+`transform: translateZ(0)` oder `backface-visibility: hidden` zwingen ein Element immer in eine eigene Ebene.
+
+Sinnvoll, wenn eine Layer später sowieso promoted wird.
+---
+### Compositing
+
+> Eine promotete Ebene kann einzeln sehr effizient in der GPU transformiert [...] werden, [...] ohne dass die COU etwas damit zu tun hat.
+
+Gut bei Blockaden des UI-Threads (z.B. durch JavaScript)! ([vorher](demos/mobile-rendering-performance/examples/loader/bad.html)/[nachher](demos/mobile-rendering-performance/examples/loader/bad.html))
 ---
 ### Weiterführende Literatur
 

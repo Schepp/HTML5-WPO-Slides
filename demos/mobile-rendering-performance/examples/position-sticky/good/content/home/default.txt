@@ -1,0 +1,90 @@
+﻿Title: Willkommen im ArabesQ
+----
+Text: Wir laden Sie ein zu einer kulinarischen Reise durch unser arabisch-mediterranes Café und Restaurant ArabesQ <span class="alternate">Arabesque</span>.
+
+## Speisekarte ###
+
+Entdecken Sie die Feinheiten und den Reichtum der modernen arabischen Spitzenküche, von raffinierten Mezze-Gerichten bis zu erlesenen Fisch-, Fleisch- und vegetarischen Spezialitäten.
+
+<a href="./assets/downloads/Speisekarte.pdf">Speisekarte (PDF, 327 KB)</a>
+
+## Öffnungszeiten ###
+
+
+Geöffnet:
+
+Café So.- Sa. von 10.00 - 24.00 Uhr
+
+Küche So.- Sa. von 12.00 - 22.00 Uhr 
+
+
+## Tisch Reservierung ###
+
+Gerne halten wir Ihnen einen Tisch frei. Rufen Sie uns an unter der  
++49 (0) 211-618 55 181 oder nutzen Sie unsere <a href="#void" id="reservierung">Online Reservierung</a>.
+
+## Salzgrotte im ArabesQ ###
+
+
+Besuchen Sie uns in unserer neuen Salzgrotte im ArabesQ und lassen Sie sich in einem einzigartigen Ambiente verwöhnen.
+EntdeckenSie in einem märchenhaften Flair aus 1001 Nacht eine neuartige Erholungsmöglichkeit, Ihr Wohlbefinden zu steigern und dem Alltagsstress zu entfliehen. Die exklusiv Atmosphäre in unserer künstlerisch gestalteten Salzgrotte lädt zum Entspannen ein. Ein 45-minütiger Aufenthalt in der Salzgrotte entspicht einem Kurzurlaub am Meer. Die Salzgrotte besteht aus 25 t reinem Himalayasalz, Naturkristallen und Salzen aus dem toten Meer, die hochwiksame Bestandteile wie Jod, Kalium, Natrium und Selen beinhalten. Sie optimieren eine starke Wirkung und helfen bei verschiedenen gesundheitlichen Beschwerden:
+- Dermatologische Erkrankungen
+- Atemwegserkrankungen
+- Allergien
+- Stress
+- Depressionen
+- Erschöpfungszustand
+- Schlafstörungen
+Wellness, Gesundheit und Entspannung - diese drei Werte vereinen wir. Ausgestattet mit modernster Technik, auf dem neuesten Stand der Entwicklung, in der größten Salzgrotte der Region.
+
+Eintrittspreise:
+Einzelkarte    14,00  Euro
+5er Karte      60,00  Euro
+10er Karte     100,00 Euro 
+
+Kinder von 6-16 Jahre
+Einzelkarte    10,00  Euro
+5er Karte      40,00  Euro
+10er Karte     70,00  Euro 
+
+Familiensitzung p.P 11,00 Euro
+
+Firmenbuchungen - Preis auf Anfrage
+      
+Geöffnet: So.- Sa. von 10.00 - 21.00 Uhr
+
+
+<a href="./assets/downloads/Salzgrotte.jpg">Salzgrotte</a>
+
+
+
+## Kontakt ##
+
+Auch Tagungen und Meetings erhalten in unseren voll ausgebauten Konferenzräumen einen besonderen Rahmen. Fragen Sie uns!
+
+ArabesQ GmbH
+Ludenbergerstraße 1-1a 
+40629 Düsseldorf (Grafenberg)
+
+Tel: +49 (0) 211-618 55 181
+E-Mail: <a href='mai&#108;to&#58;i&#110;&#37;&#54;6o%4&#48;%61r&#97;&#98;&#37;&#54;5sq%2Ed&#101;'>info&#64;a&#114;ab&#101;sq&#46;&#100;e</a>
+<a href="https://www.facebook.com/pages/ArabesQ-D%C3%BCsseldorf/330033097085004?fref=ts" target="_blank"><img src="./assets/downloads/FacebookIcon.jpg" style="padding-top:5px;"/></a>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41786618-1', 'arabesq.de');
+  ga('send', 'pageview');
+
+</script>
+
+
+## Anfahrt ##
+
+Unweit des Rochus Clubs, der Galopprennbahn und der Golfanlage Düsseldorf-Grafenberg finden Sie das ArabesQ <span class="alternate">Arabesque</span> am Ende der Grafenberger Allee, jeweils ca. 10 Minuten entfernt von Altstadt, Flughafen, Messegelände und Hauptbahnhof.
+
+Ausreichend kostenfreie Parkplätze sind direkt neben dem ArabesQ <span class="alternate">Arabesque</span> vorhanden auf dem gegenüberliegenden Staufenplatz. Von dort aus sind es nur wenige Schritte zum ArabesQ <span class="alternate">Arabesque</span>! 
+

@@ -1,0 +1,22 @@
+%border {
+  border: 1px solid #CCC;
+  border-radius: 2px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+}
+
+%shiny {
+  background: linear-gradient(to bottom, #FFF, #DDD 35%, #888 60%, #DDD 65%, #666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+%textbox {
+  background: url(../../assets/images/transparent.png);
+  background: rgba(255, 255, 255, 0.925);
+  color: #000;
+  border: 1px solid #FFF;
+  border-radius: 2px;
+  text-align: left;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+}

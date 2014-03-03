@@ -1,0 +1,31 @@
+$(window).load(function(){
+    window.setTimeout(function(){
+        $.getScript('https://secure.livebookings.com/lbui/plugins/direct/lbui.direct.min.js',function(){
+            window.livebookingcode = function(){
+                LBDirect_Embed({
+                    connectionid: "DE-RES-ARABESQ_210669:51412",
+                    style:{
+                        borderColor: "000000",
+                        borderStyle: "3"
+                    },
+                    language: "de-DE"
+                });
+            };
+
+            $('#reservierung').lbuiDirect({
+                connectionid: 'DE-RES-ARABESQ_210669:51412',
+                language: 'de-DE',
+                style: {
+                    baseColor: 'cccccc',
+                    pageColor: '000000',
+                    highlightColor: 'ff0000',
+                    borderStyle: 0,
+                    borderColor: '000000'
+                },
+                modalWindow: {
+                    enabled: true
+                }
+            });
+        });
+    },1000);
+});
