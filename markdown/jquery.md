@@ -333,20 +333,6 @@ Mobile:
 Can I use [CSS Animation](http://caniuse.com/css-animation) / [CSS Transition](http://caniuse.com/css-transition) / [classList](http://caniuse.com/classlist)
 
 ---
-### Gruppenarbeit?
-
-Lasst uns jQuery nachbauen! z.B.:
-
-- $('selector')
-- children(), find(), each(), is()
-- css() mit einer Eigenschaft, oder mit Eigenschaften-Map
-- add-/remove-/toggleClass()
-- fadeIn/-Out/slideDown/-Up()
-- on() mit Event Delegation
-- **Bonus**: Methoden arbeiten mit Arrays, $()[0] überflüssig
-- **Bonus**: Es sollen $() koexisitiert mit $.getJson()
-
----
 ### Weiterführende Literatur
 
 * [I know jQuery. Now what?](http://remysharp.com/2013/04/19/i-know-jquery-now-what/)
