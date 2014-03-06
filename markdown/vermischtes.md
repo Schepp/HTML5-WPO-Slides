@@ -1,6 +1,6 @@
 ## Vermischtes
 
-<small>(0)</small>
+<small>(9)</small>
 ---
 ### [requestAnimationFrame](http://www.html5rocks.com/en/tutorials/speed/animations/)
 ---
