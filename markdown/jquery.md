@@ -1,4 +1,6 @@
 ## jQuery durch native Techniken ersetzen
+
+<small>(21)</small>
 ---
 ### jQuery-Selector
 

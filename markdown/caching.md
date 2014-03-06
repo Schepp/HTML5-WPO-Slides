@@ -1,4 +1,6 @@
 ## Klügeres Caching via HTML5 APIs
+
+<small>(47)</small>
 ---
 ### Motivation
 

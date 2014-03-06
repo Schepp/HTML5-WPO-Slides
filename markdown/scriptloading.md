@@ -1,4 +1,6 @@
 ## Scriptloading
+
+<small>(20)</small>
 ---
 ### Defer
 ```html

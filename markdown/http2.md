@@ -1,4 +1,6 @@
 ## SPDY aka HTTP/2
+
+<small>(17)</small>
 ---
 ### Eigenschaften von SPDY
 

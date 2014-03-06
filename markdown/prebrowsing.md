@@ -1,4 +1,6 @@
 ## Vorladen, Vorrendern & Nachladen
+
+<small>(32)</small>
 ---
 ### Prefetching
 
