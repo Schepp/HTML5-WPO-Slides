@@ -1,5 +1,5 @@
 <div id="content">
-    <p>Hello World!</p>
+    <p>Hello World! 123</p>
 </div>
 
 <script>
@@ -8,10 +8,10 @@
         var mainDoc = document;
         var content = importDoc.querySelector('#content').innerHTML;
         if (mainDoc.readyState === 'interactive') {
-            mainDoc.body.innerHTML = content;
+            //mainDoc.body.innerHTML += content;
         } else {
             mainDoc.addEventListener('DOMContentLoaded', function(){
-                mainDoc.body.innerHTML = content;
+                //mainDoc.body.innerHTML += content;
             })
         }
     }());
