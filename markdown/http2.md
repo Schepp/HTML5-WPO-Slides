@@ -79,14 +79,18 @@ Upgrade: HTTP/2.0
 ---
 ### Serverside
 
-|                                                         | HTTP                                     | HTTPS                                    |SPDY                                     |
-|---------------------------------------------------------|------------------------------------------|------------------------------------------|-----------------------------------------|
-| Maximum pages/s                                         | 16.3 pages/s at 120 users                | 15.9 pages/s at 120 users                | 98 pages/s at 777 users                 |
-| Page response time at 100 users                         | 1.1s                                     | 1.3s                                     | 1.1s                                    |
-| Page response time at 120 users                         | 1.4 s                                    | 1.5s                                     | 1.1s                                    |
-| Page response time at 200 users                         | 7.1s                                     | 7.8s                                     | 1.1s                                    |
-| Page response time at 777 users                         | 70.2s                                    | 72s                                      | 2.7s                                    |
-| First error                                             | 405 Users                                | 225 Users                                | 884 Users                               |
+<small>
+
+|                                               | HTTP                                     | HTTPS                                    |SPDY                                     |
+|-----------------------------------------------|------------------------------------------|------------------------------------------|-----------------------------------------|
+| Maximum pages/s                               | 16.3 at 120 users                        | 15.9 at 120 users                        | 98 at 777 users                         |
+| Response at 100 users                         | 1.1s                                     | 1.3s                                     | 1.1s                                    |
+| Response at 120 users                         | 1.4 s                                    | 1.5s                                     | 1.1s                                    |
+| Response at 200 users                         | 7.1s                                     | 7.8s                                     | 1.1s                                    |
+| Response at 777 users                         | 70.2s                                    | 72s                                      | 2.7s                                    |
+| First error                                   | 405 Users                                | 225 Users                                | 884 Users                               |
+
+</small>
 
 [Quelle](http://www.neotys.com/blog/performance-of-spdy-enabled-web-servers/)
 ---
