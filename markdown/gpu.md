@@ -318,9 +318,7 @@ Nicht zu viele CSS3-Effekte einsetzen! [Speziell in Kombination werden sie teuer
 
 Auch wenn es anachronistisch klingt: Im Zweifel besser Bilder verwenden.
 ---
-### Zukunft
-
-[Die Browserhersteller arbeiten](http://aerotwist.com/blog/bye-bye-layer-hacks/) an einer neuen CSS-Eigenschaft namens [`will-change`](http://tabatkins.github.io/specs/css-will-change/), die den Browsern signalisiert, dass eine Eigenschaft sich um Lauf des Lebenszyklus' ändern wird:
+### will-change: Die Zukunft, oder vielleicht doch eher major Fuckup?
 
 ```css
 html {
