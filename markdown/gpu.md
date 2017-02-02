@@ -83,17 +83,16 @@ Vorteile
 Nachteile auf Mobilgeräten
 
 * Während des Scrollens nimmt die GPU keine Paint-Updates entgegen (Animated GIFs bleiben z.B. stehen)
-* Da die CPU außen vor bleibt, empfängt sie keinerlei `onscroll`-Events von der GPU*
+* Da die CPU außen vor bleibt, empfängt sie keine bis wenige `onscroll`-Events von der GPU
 
 Kuriosum: Fixed positionierte Animated GIFs [werden weiterhin animiert](demos/mobile-rendering-performance/examples/scrolling-with-loader/)!
 
-*= Chrome auf Android wählt einen Mittelweg und updated zwischendurch.
 ---
 ### Scrolling
 
-> Da die CPU außen vor bleibt, empfängt sie keinerlei `onscroll`-Events von der GPU
+> DDa die CPU außen vor bleibt, empfängt sie keine bis wenige `onscroll`-Events von der GPU
 
-Bei "klebenden" Menüs schafft die neue Eigenschaft `position: sticky` Abhilfe ([vorher](demos/mobile-rendering-performance/examples/position-sticky/bad/)/[nachher](demos/mobile-rendering-performance/examples/position-sticky/good/)). Unterstützen bisher nur die [Safaris](http://caniuse.com/css-sticky).
+Bei "klebenden" Menüs schafft die neue Eigenschaft `position: sticky` Abhilfe ([vorher](demos/mobile-rendering-performance/examples/position-sticky/bad/)/[nachher](demos/mobile-rendering-performance/examples/position-sticky/good/), [Browsersupport](http://caniuse.com/css-sticky)).
 
 ---
 ### Offcanvas Menüs
