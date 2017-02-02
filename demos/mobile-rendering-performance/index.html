@@ -6,11 +6,20 @@
 	<title>Mobile Rendering Performance</title>
 </head>
 <body>
+	<h1>Mobile Rendering Preformance Demos</h1>
 	<ul>
+    	<li><a href="examples/scrolling/bad.html">Long page to scroll, with tiles not all painted</a></li>
+		<li><a href="examples/scrolling-with-loader/">Scrolling doesn't stop fixed positioned GIF-Loader from animating</a></li>
+    	<li>Sticky elements <a href="examples/position-sticky/bad/">bad</a> <a href="examples/position-sticky/good/">good</a></li>
     	<li>Animation of position <a href="examples/position-animation/bad.html">bad</a> <a href="examples/position-animation/good.html">good</a></li>
-    	<!-- <li>Animation of colors <a href="examples/color-animation/index.html">bad</a> <a href="examples/color-animation/good.html">good</a></li> -->
-    	<li>Loading spinner <a href="examples/loaders/bad.html">bad</a> <a href="examples/loaders/good.html">good</a></li>
-    	<li><a href="examples/continous-paint/">Finding Rendering Bottlenecks with Continous Paint Mode</a></li>
+		<li>Loading spinner <a href="examples/loaders/bad.html">bad</a> <a href="examples/loaders/good.html">good</a></li>
+		<li><a href="examples/continous-paint/">Finding Rendering Bottlenecks with Continous Paint Mode</a></li>
+    	 <li>Animation of colors <a href="examples/color-animation/index.html">bad</a> <a href="examples/color-animation/good.html">good</a></li>
     </ul>
+<script>
+	var img = new Image();
+	img.src = 'https://chart.googleapis.com/chart?chs=400x400&cht=qr&chl=' + encodeURIComponent(window.location.href);
+	document.body.appendChild(img);
+</script>
 </body>
 </html>
