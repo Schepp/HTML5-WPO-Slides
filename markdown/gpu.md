@@ -169,7 +169,7 @@ Sinnvoll, wenn eine Layer später sowieso promoted wird.
 
 > Eine promotete Ebene kann einzeln sehr effizient in der GPU transformiert [...] werden, [...] ohne dass die CPU etwas damit zu tun hat.
 
-Gut bei Blockaden des UI-Threads (z.B. durch JavaScript)! (siehe [vorher](demos/mobile-rendering-performance/examples/loaders/bad.html)/[nachher](demos/mobile-rendering-performance/examples/loaders/bad.html))
+Gut bei Blockaden des UI-Threads (z.B. durch JavaScript)! (siehe [vorher](demos/mobile-rendering-performance/examples/loaders/bad.html)/[nachher](demos/mobile-rendering-performance/examples/loaders/good.html))
 ---
 ### Compositing
 
